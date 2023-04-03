@@ -1,5 +1,5 @@
 Analysis & Synthesis report for DE1_SoC
-Mon Apr 03 11:05:56 2023
+Mon Apr 03 14:21:10 2023
 Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
 
 
@@ -10,13 +10,10 @@ Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Source Files Read
-  6. Analysis & Synthesis Resource Usage Summary
-  7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Post-Synthesis Netlist Statistics for Top Partition
- 10. Elapsed Time Per Partition
- 11. Analysis & Synthesis Messages
+  5. Parameter Settings for User Entity Instance: Top-level Entity: |reg_file_testbench
+  6. Port Connectivity Checks: "reg_file:dut"
+  7. Elapsed Time Per Partition
+  8. Analysis & Synthesis Messages
 
 
 
@@ -40,27 +37,22 @@ agreement for further details.
 
 
 
-+-------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                  ;
-+---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Mon Apr 03 11:05:56 2023       ;
-; Quartus Prime Version           ; 17.0.0 Build 595 04/25/2017 SJ Lite Edition ;
-; Revision Name                   ; DE1_SoC                                     ;
-; Top-level Entity Name           ; fullAdder                                   ;
-; Family                          ; Cyclone V                                   ;
-; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 0                                           ;
-; Total pins                      ; 5                                           ;
-; Total virtual pins              ; 0                                           ;
-; Total block memory bits         ; 0                                           ;
-; Total DSP Blocks                ; 0                                           ;
-; Total HSSI RX PCSs              ; 0                                           ;
-; Total HSSI PMA RX Deserializers ; 0                                           ;
-; Total HSSI TX PCSs              ; 0                                           ;
-; Total HSSI PMA TX Serializers   ; 0                                           ;
-; Total PLLs                      ; 0                                           ;
-; Total DLLs                      ; 0                                           ;
-+---------------------------------+---------------------------------------------+
++---------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                              ;
++-----------------------------+---------------------------------------------+
+; Analysis & Synthesis Status ; Failed - Mon Apr 03 14:21:10 2023           ;
+; Quartus Prime Version       ; 17.0.0 Build 595 04/25/2017 SJ Lite Edition ;
+; Revision Name               ; DE1_SoC                                     ;
+; Top-level Entity Name       ; reg_file_testbench                          ;
+; Family                      ; Cyclone V                                   ;
+; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
+; Total registers             ; N/A until Partition Merge                   ;
+; Total pins                  ; N/A until Partition Merge                   ;
+; Total virtual pins          ; N/A until Partition Merge                   ;
+; Total block memory bits     ; N/A until Partition Merge                   ;
+; Total PLLs                  ; N/A until Partition Merge                   ;
+; Total DLLs                  ; N/A until Partition Merge                   ;
++-----------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -69,7 +61,7 @@ agreement for further details.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
-; Top-level entity name                                                           ; fullAdder          ; DE1_SoC            ;
+; Top-level entity name                                                           ; reg_file_testbench ; DE1_SoC            ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; State Machine Processing                                                        ; User-Encoded       ; Auto               ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
@@ -166,80 +158,28 @@ agreement for further details.
 +----------------------------+-------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                         ;
-+----------------------------------+-----------------+------------------------------+------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                     ; Library ;
-+----------------------------------+-----------------+------------------------------+------------------------------------------------------------------+---------+
-; fullAdder.sv                     ; yes             ; User SystemVerilog HDL File  ; C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/fullAdder.sv ;         ;
-+----------------------------------+-----------------+------------------------------+------------------------------------------------------------------+---------+
++------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |reg_file_testbench ;
++----------------+-------+-----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                      ;
++----------------+-------+-----------------------------------------------------------+
+; clock_period   ; 100   ; Signed Integer                                            ;
++----------------+-------+-----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+-------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary           ;
-+---------------------------------------------+---------+
-; Resource                                    ; Usage   ;
-+---------------------------------------------+---------+
-; Estimate of Logic utilization (ALMs needed) ; 1       ;
-;                                             ;         ;
-; Combinational ALUT usage for logic          ; 2       ;
-;     -- 7 input functions                    ; 0       ;
-;     -- 6 input functions                    ; 0       ;
-;     -- 5 input functions                    ; 0       ;
-;     -- 4 input functions                    ; 0       ;
-;     -- <=3 input functions                  ; 2       ;
-;                                             ;         ;
-; Dedicated logic registers                   ; 0       ;
-;                                             ;         ;
-; I/O pins                                    ; 5       ;
-;                                             ;         ;
-; Total DSP Blocks                            ; 0       ;
-;                                             ;         ;
-; Maximum fan-out node                        ; A~input ;
-; Maximum fan-out                             ; 2       ;
-; Total fan-out                               ; 13      ;
-; Average fan-out                             ; 1.08    ;
-+---------------------------------------------+---------+
-
-
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                    ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; |fullAdder                 ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 5    ; 0            ; |fullAdder          ; fullAdder   ; work         ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-+------------------------------------------------------+
-; General Register Statistics                          ;
-+----------------------------------------------+-------+
-; Statistic                                    ; Value ;
-+----------------------------------------------+-------+
-; Total registers                              ; 0     ;
-; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 0     ;
-; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
-; Number of registers using Preset             ; 0     ;
-+----------------------------------------------+-------+
-
-
-+-----------------------------------------------------+
-; Post-Synthesis Netlist Statistics for Top Partition ;
-+-----------------------+-----------------------------+
-; Type                  ; Count                       ;
-+-----------------------+-----------------------------+
-; arriav_lcell_comb     ; 2                           ;
-;     normal            ; 2                           ;
-;         3 data inputs ; 2                           ;
-; boundary_port         ; 5                           ;
-;                       ;                             ;
-; Max LUT depth         ; 1.00                        ;
-; Average LUT depth     ; 1.00                        ;
-+-----------------------+-----------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "reg_file:dut"                                                                                                                                                                            ;
++------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port       ; Type   ; Severity ; Details                                                                                                                                                                            ;
++------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; write_addr ; Input  ; Warning  ; Input port expression (32 bits) is wider than the input port (4 bits) it drives.  The 28 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; read_addr1 ; Input  ; Warning  ; Input port expression (32 bits) is wider than the input port (4 bits) it drives.  The 28 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; read_data1 ; Output ; Warning  ; Output or bidir port (32 bits) is wider than the port expression (4 bits) it drives; bit(s) "read_data1[31..4]" have no fanouts                                                    ;
+; read_data1 ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                                ;
+; read_data2 ; Output ; Warning  ; Output or bidir port (32 bits) is wider than the port expression (4 bits) it drives; bit(s) "read_data2[31..4]" have no fanouts                                                    ;
+; read_data2 ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                                ;
++------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +-------------------------------+
@@ -257,30 +197,30 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
-    Info: Processing started: Mon Apr 03 11:05:45 2023
+    Info: Processing started: Mon Apr 03 14:20:57 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE1_SoC -c DE1_SoC
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
-Info (12021): Found 2 design units, including 2 entities, in source file fulladder.sv
-    Info (12023): Found entity 1: fullAdder File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/fullAdder.sv Line: 1
-    Info (12023): Found entity 2: fullAdder_testbench File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/fullAdder.sv Line: 11
-Info (12021): Found 2 design units, including 2 entities, in source file reg_file.sv
-    Info (12023): Found entity 1: reg_file File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file.sv Line: 1
-    Info (12023): Found entity 2: reg_file_testbench File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file.sv Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file fulladder.sv
+    Info (12023): Found entity 1: fullAdder File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/fullAdder.sv Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file reg_file.sv
+    Info (12023): Found entity 1: reg_file File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file.sv Line: 2
 Info (12021): Found 1 design units, including 1 entities, in source file alu.sv
     Info (12023): Found entity 1: alu File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu.sv Line: 1
-Info (12127): Elaborating entity "fullAdder" for the top level hierarchy
-Info (286030): Timing-Driven Synthesis is running
-Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 7 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 3 input pins
-    Info (21059): Implemented 2 output pins
-    Info (21061): Implemented 2 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4816 megabytes
-    Info: Processing ended: Mon Apr 03 11:05:56 2023
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:24
+Info (12021): Found 1 design units, including 1 entities, in source file reg_file_testbench.sv
+    Info (12023): Found entity 1: reg_file_testbench File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file fulladder_testbench.sv
+    Info (12023): Found entity 1: fullAdder_testbench File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/fullAdder_testbench.sv Line: 2
+Info (12127): Elaborating entity "reg_file_testbench" for the top level hierarchy
+Warning (10855): Verilog HDL warning at reg_file_testbench.sv(13): initial value for variable clk should be constant File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv Line: 13
+Warning (10175): Verilog HDL warning at reg_file_testbench.sv(37): ignoring unsupported system task File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv Line: 37
+Info (12128): Elaborating entity "reg_file" for hierarchy "reg_file:dut" File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv Line: 8
+Error (12061): Can't synthesize current design -- Top partition does not contain any logic
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Error: Quartus Prime Analysis & Synthesis was unsuccessful. 1 error, 4 warnings
+    Error: Peak virtual memory: 4783 megabytes
+    Error: Processing ended: Mon Apr 03 14:21:10 2023
+    Error: Elapsed time: 00:00:13
+    Error: Total CPU time (on all processors): 00:00:33
 
 

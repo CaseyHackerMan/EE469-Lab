@@ -1,3 +1,4 @@
+// Implements a full adder
 module fullAdder (A, B, cin, sum, cout);
 	
 	input logic A,B,cin;
@@ -8,21 +9,3 @@ module fullAdder (A, B, cin, sum, cout);
 	
 endmodule
 
-module fullAdder_testbench();
-	
-	logic A,B,cin,sum,cout;
-	
-	fullAdder dut (A, B, cin, sum, cout);
-	
-	integer i;
-	initial begin
-	
-		for (i=0; i<2**3; i++) begin
-			{A, B, cin} = i; #10;
-		end
-		
-		$stop;
-		
-	end
-	
-endmodule
