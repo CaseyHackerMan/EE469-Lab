@@ -1,5 +1,5 @@
-Analysis & Synthesis report for DE1_SoC
-Mon Apr 03 14:21:10 2023
+Analysis & Elaboration report for DE1_SoC
+Tue Apr 04 18:25:11 2023
 Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
 
 
@@ -7,13 +7,12 @@ Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
 ; Table of Contents ;
 ---------------------
   1. Legal Notice
-  2. Analysis & Synthesis Summary
-  3. Analysis & Synthesis Settings
-  4. Parallel Compilation
-  5. Parameter Settings for User Entity Instance: Top-level Entity: |reg_file_testbench
-  6. Port Connectivity Checks: "reg_file:dut"
-  7. Elapsed Time Per Partition
-  8. Analysis & Synthesis Messages
+  2. Analysis & Elaboration Summary
+  3. Parallel Compilation
+  4. Parameter Settings for User Entity Instance: Top-level Entity: |alu_testbench
+  5. Analysis & Elaboration Settings
+  6. Port Connectivity Checks: "alu:dut"
+  7. Analysis & Elaboration Messages
 
 
 
@@ -37,31 +36,57 @@ agreement for further details.
 
 
 
-+---------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                              ;
-+-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Failed - Mon Apr 03 14:21:10 2023           ;
-; Quartus Prime Version       ; 17.0.0 Build 595 04/25/2017 SJ Lite Edition ;
-; Revision Name               ; DE1_SoC                                     ;
-; Top-level Entity Name       ; reg_file_testbench                          ;
-; Family                      ; Cyclone V                                   ;
-; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
-; Total registers             ; N/A until Partition Merge                   ;
-; Total pins                  ; N/A until Partition Merge                   ;
-; Total virtual pins          ; N/A until Partition Merge                   ;
-; Total block memory bits     ; N/A until Partition Merge                   ;
-; Total PLLs                  ; N/A until Partition Merge                   ;
-; Total DLLs                  ; N/A until Partition Merge                   ;
-+-----------------------------+---------------------------------------------+
++-----------------------------------------------------------------------------+
+; Analysis & Elaboration Summary                                              ;
++-------------------------------+---------------------------------------------+
+; Analysis & Elaboration Status ; Successful - Tue Apr 04 18:25:11 2023       ;
+; Quartus Prime Version         ; 17.0.0 Build 595 04/25/2017 SJ Lite Edition ;
+; Revision Name                 ; DE1_SoC                                     ;
+; Top-level Entity Name         ; alu_testbench                               ;
+; Family                        ; Cyclone V                                   ;
+; Logic utilization (in ALMs)   ; N/A until Partition Merge                   ;
+; Total registers               ; N/A until Partition Merge                   ;
+; Total pins                    ; N/A until Partition Merge                   ;
+; Total virtual pins            ; N/A until Partition Merge                   ;
+; Total block memory bits       ; N/A until Partition Merge                   ;
+; Total PLLs                    ; N/A until Partition Merge                   ;
+; Total DLLs                    ; N/A until Partition Merge                   ;
++-------------------------------+---------------------------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |alu_testbench ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; clock_period   ; 100   ; Signed Integer                                       ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Settings                                                                                             ;
+; Analysis & Elaboration Settings                                                                                           ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
-; Top-level entity name                                                           ; reg_file_testbench ; DE1_SoC            ;
+; Top-level entity name                                                           ; alu_testbench      ; DE1_SoC            ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; State Machine Processing                                                        ; User-Encoded       ; Auto               ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
@@ -142,85 +167,51 @@ agreement for further details.
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 
 
-+------------------------------------------+
-; Parallel Compilation                     ;
-+----------------------------+-------------+
-; Processors                 ; Number      ;
-+----------------------------+-------------+
-; Number detected on machine ; 8           ;
-; Maximum allowed            ; 4           ;
-;                            ;             ;
-; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
-;                            ;             ;
-; Usage by Processor         ; % Time Used ;
-;     Processor 1            ; 100.0%      ;
-+----------------------------+-------------+
++----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:dut"                                                                                  ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port       ; Type   ; Severity ; Details                                                                             ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; a          ; Input  ; Info     ; Stuck at GND                                                                        ;
+; b          ; Input  ; Info     ; Stuck at GND                                                                        ;
+; ALUControl ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; Result     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; ALUFlags   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: Top-level Entity: |reg_file_testbench ;
-+----------------+-------+-----------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                      ;
-+----------------+-------+-----------------------------------------------------------+
-; clock_period   ; 100   ; Signed Integer                                            ;
-+----------------+-------+-----------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "reg_file:dut"                                                                                                                                                                            ;
-+------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port       ; Type   ; Severity ; Details                                                                                                                                                                            ;
-+------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; write_addr ; Input  ; Warning  ; Input port expression (32 bits) is wider than the input port (4 bits) it drives.  The 28 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
-; read_addr1 ; Input  ; Warning  ; Input port expression (32 bits) is wider than the input port (4 bits) it drives.  The 28 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
-; read_data1 ; Output ; Warning  ; Output or bidir port (32 bits) is wider than the port expression (4 bits) it drives; bit(s) "read_data1[31..4]" have no fanouts                                                    ;
-; read_data1 ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                                ;
-; read_data2 ; Output ; Warning  ; Output or bidir port (32 bits) is wider than the port expression (4 bits) it drives; bit(s) "read_data2[31..4]" have no fanouts                                                    ;
-; read_data2 ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                                ;
-+------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-+-------------------------------+
-; Elapsed Time Per Partition    ;
-+----------------+--------------+
-; Partition Name ; Elapsed Time ;
-+----------------+--------------+
-; Top            ; 00:00:00     ;
-+----------------+--------------+
-
-
-+-------------------------------+
-; Analysis & Synthesis Messages ;
-+-------------------------------+
++---------------------------------+
+; Analysis & Elaboration Messages ;
++---------------------------------+
 Info: *******************************************************************
-Info: Running Quartus Prime Analysis & Synthesis
+Info: Running Quartus Prime Analysis & Elaboration
     Info: Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
-    Info: Processing started: Mon Apr 03 14:20:57 2023
-Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE1_SoC -c DE1_SoC
+    Info: Processing started: Tue Apr 04 18:24:56 2023
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE1_SoC -c DE1_SoC --analysis_and_elaboration
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file fulladder.sv
     Info (12023): Found entity 1: fullAdder File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/fullAdder.sv Line: 2
-Info (12021): Found 1 design units, including 1 entities, in source file reg_file.sv
-    Info (12023): Found entity 1: reg_file File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file.sv Line: 2
 Info (12021): Found 1 design units, including 1 entities, in source file alu.sv
     Info (12023): Found entity 1: alu File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file reg_file.sv
+    Info (12023): Found entity 1: reg_file File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file reg_file_testbench.sv
     Info (12023): Found entity 1: reg_file_testbench File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file de1_soc_golden_top.v
+    Info (12023): Found entity 1: DE1_SOC_golden_top File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/DE1_SOC_golden_top.v Line: 54
 Info (12021): Found 1 design units, including 1 entities, in source file fulladder_testbench.sv
     Info (12023): Found entity 1: fullAdder_testbench File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/fullAdder_testbench.sv Line: 2
-Info (12127): Elaborating entity "reg_file_testbench" for the top level hierarchy
-Warning (10855): Verilog HDL warning at reg_file_testbench.sv(13): initial value for variable clk should be constant File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv Line: 13
-Warning (10175): Verilog HDL warning at reg_file_testbench.sv(37): ignoring unsupported system task File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv Line: 37
-Info (12128): Elaborating entity "reg_file" for hierarchy "reg_file:dut" File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv Line: 8
-Error (12061): Can't synthesize current design -- Top partition does not contain any logic
-Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 1 error, 4 warnings
-    Error: Peak virtual memory: 4783 megabytes
-    Error: Processing ended: Mon Apr 03 14:21:10 2023
-    Error: Elapsed time: 00:00:13
-    Error: Total CPU time (on all processors): 00:00:33
+Info (12021): Found 1 design units, including 1 entities, in source file alu_testbench.sv
+    Info (12023): Found entity 1: alu_testbench File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv Line: 1
+Info (12127): Elaborating entity "alu_testbench" for the top level hierarchy
+Warning (10855): Verilog HDL warning at alu_testbench.sv(14): initial value for variable clk should be constant File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv Line: 14
+Warning (10175): Verilog HDL warning at alu_testbench.sv(43): ignoring unsupported system task File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv Line: 43
+Info (12128): Elaborating entity "alu" for hierarchy "alu:dut" File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv Line: 9
+Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 4767 megabytes
+    Info: Processing ended: Tue Apr 04 18:25:11 2023
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:38
 
 

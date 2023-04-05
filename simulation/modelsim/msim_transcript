@@ -10,33 +10,42 @@
 # Copying C:/intelFPGA_lite/17.0/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
 # Modifying modelsim.ini
 # 
-# vlog -sv -work work +incdir+C:/Users/casey/Desktop/Class\ Stuff/EE\ 469/lab1 {C:/Users/casey/Desktop/Class Stuff/EE 469/lab1/fullAdder.sv}
+# vlog -sv -work work +incdir+C:/Users/casey/Desktop/Class\ Stuff/EE\ 469/EE469-Lab {C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 10:04:34 on Apr 03,2023
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/casey/Desktop/Class Stuff/EE 469/lab1" C:/Users/casey/Desktop/Class Stuff/EE 469/lab1/fullAdder.sv 
-# -- Compiling module fullAdder
-# -- Compiling module fullAdder_testbench
+# Start time: 18:25:32 on Apr 04,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab" C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu.sv 
+# -- Compiling module alu
 # 
 # Top level modules:
-# 	fullAdder_testbench
-# End time: 10:04:34 on Apr 03,2023, Elapsed time: 0:00:00
+# 	alu
+# End time: 18:25:32 on Apr 04,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/casey/Desktop/Class\ Stuff/EE\ 469/EE469-Lab {C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 18:25:32 on Apr 04,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab" C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv 
+# -- Compiling module alu_testbench
+# 
+# Top level modules:
+# 	alu_testbench
+# End time: 18:25:32 on Apr 04,2023, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
-vsim work.fullAdder_testbench
-# vsim work.fullAdder_testbench 
-# Start time: 10:05:30 on Apr 03,2023
+vsim work.alu_testbench
+# vsim work.alu_testbench 
+# Start time: 18:25:36 on Apr 04,2023
 # Loading sv_std.std
-# Loading work.fullAdder_testbench
-# Loading work.fullAdder
-add wave -position end  sim:/fullAdder_testbench/i
-add wave -position end  sim:/fullAdder_testbench/A
-add wave -position end  sim:/fullAdder_testbench/B
-add wave -position end  sim:/fullAdder_testbench/cin
-add wave -position end  sim:/fullAdder_testbench/sum
-add wave -position end  sim:/fullAdder_testbench/cout
-run -all
-# ** Note: $stop    : C:/Users/casey/Desktop/Class Stuff/EE 469/lab1/fullAdder.sv(24)
-#    Time: 80 ps  Iteration: 0  Instance: /fullAdder_testbench
-# Break in Module fullAdder_testbench at C:/Users/casey/Desktop/Class Stuff/EE 469/lab1/fullAdder.sv line 24
-# End time: 10:13:16 on Apr 03,2023, Elapsed time: 0:07:46
+# Loading work.alu_testbench
+# Loading work.alu
+add wave -position end  sim:/alu_testbench/clk
+add wave -position end  sim:/alu_testbench/a
+add wave -position end  sim:/alu_testbench/b
+add wave -position end  sim:/alu_testbench/ALUControl
+add wave -position end  sim:/alu_testbench/Result
+add wave -position end  sim:/alu_testbench/ALUFlags
+run -a
+# ** Note: $stop    : C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv(43)
+#    Time: 1650 ps  Iteration: 1  Instance: /alu_testbench
+# Break in Module alu_testbench at C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv line 43
+# End time: 18:26:17 on Apr 04,2023, Elapsed time: 0:00:41
 # Errors: 0, Warnings: 0
