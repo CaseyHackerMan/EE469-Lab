@@ -10,43 +10,65 @@
 # Copying C:/intelFPGA_lite/17.0/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
 # Modifying modelsim.ini
 # 
-# vlog -sv -work work +incdir+C:/Users/casey/Desktop/Class\ Stuff/EE\ 469/EE469-Lab {C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file.sv}
+# vlog -sv -work work +incdir+C:/Users/casey/Desktop/Class\ Stuff/EE\ 469/EE469-Lab {C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 14:32:18 on Apr 06,2023
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab" C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file.sv 
-# -- Compiling module reg_file
+# Start time: 15:46:15 on Apr 06,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab" C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu.sv 
+# -- Compiling module alu
+# -- Compiling module alu_testbench2
 # 
 # Top level modules:
-# 	reg_file
-# End time: 14:32:18 on Apr 06,2023, Elapsed time: 0:00:00
+# 	alu_testbench2
+# End time: 15:46:15 on Apr 06,2023, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vlog -sv -work work +incdir+C:/Users/casey/Desktop/Class\ Stuff/EE\ 469/EE469-Lab {C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv}
+# vlog -sv -work work +incdir+C:/Users/casey/Desktop/Class\ Stuff/EE\ 469/EE469-Lab {C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 14:32:18 on Apr 06,2023
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab" C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv 
-# -- Compiling module reg_file_testbench
+# Start time: 15:46:15 on Apr 06,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab" C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv 
+# -- Compiling module alu_testbench
 # 
 # Top level modules:
-# 	reg_file_testbench
-# End time: 14:32:18 on Apr 06,2023, Elapsed time: 0:00:00
+# 	alu_testbench
+# End time: 15:46:15 on Apr 06,2023, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
-vsim work.reg_file_testbench
-# vsim work.reg_file_testbench 
-# Start time: 14:32:22 on Apr 06,2023
+vsim work.alu_testbench
+# vsim work.alu_testbench 
+# Start time: 15:46:18 on Apr 06,2023
 # Loading sv_std.std
-# Loading work.reg_file_testbench
-# Loading work.reg_file
-add wave -position end  sim:/reg_file_testbench/clk
-add wave -position end  sim:/reg_file_testbench/wr_en
-add wave -position end  sim:/reg_file_testbench/write_data
-add wave -position end  sim:/reg_file_testbench/read_data1
-add wave -position end  sim:/reg_file_testbench/read_data2
-add wave -position end  sim:/reg_file_testbench/write_addr
-add wave -position end  sim:/reg_file_testbench/read_addr1
-add wave -position end  sim:/reg_file_testbench/read_addr2
-add wave -position end  sim:/reg_file_testbench/dut/memory
+# Loading work.alu_testbench
+# Loading work.alu
+# ** Warning: (vsim-3839) C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv(27): Variable '/alu_testbench/Result', driven via a port connection, is multiply driven. See C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv(10).
+#    Time: 0 ps  Iteration: 0  Instance: /alu_testbench File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv
+# ** Warning: (vsim-3839) C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv(27): Variable '/alu_testbench/ALUFlags', driven via a port connection, is multiply driven. See C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv(10).
+#    Time: 0 ps  Iteration: 0  Instance: /alu_testbench File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv
+add wave -position end  sim:/alu_testbench/clk
+add wave -position end  sim:/alu_testbench/a
+add wave -position end  sim:/alu_testbench/b
+add wave -position end  sim:/alu_testbench/ALUControl
+add wave -position end  sim:/alu_testbench/Result
+add wave -position end  sim:/alu_testbench/ALUFlags
+add wave -position end  sim:/alu_testbench/testvectors
+run -all
+# ** Warning: (vsim-7) Failed to open readmem file "alu.tv" in read mode.
+# No such file or directory. (errno = ENOENT)    : C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv(24)
+#    Time: 0 ps  Iteration: 0  Instance: /alu_testbench
+cd ..
+# Cannot change directory while a simulation is in progress.
+# Use the "quit -sim" command to unload the design first.
+cd ..
+# Cannot change directory while a simulation is in progress.
+# Use the "quit -sim" command to unload the design first.
+pwd
+# C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/simulation/modelsim
 run -a
-# ** Note: $stop    : C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv(41)
-#    Time: 950 ps  Iteration: 1  Instance: /reg_file_testbench
-# Break in Module reg_file_testbench at C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv line 41
+cd ..
+# Cannot change directory while a simulation is in progress.
+# Use the "quit -sim" command to unload the design first.
+pwd
+# C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/simulation/modelsim
+cd ../..
+# Cannot change directory while a simulation is in progress.
+# Use the "quit -sim" command to unload the design first.
+# End time: 15:48:38 on Apr 06,2023, Elapsed time: 0:02:20
+# Errors: 4, Warnings: 3

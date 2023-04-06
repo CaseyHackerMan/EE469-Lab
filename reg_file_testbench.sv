@@ -1,3 +1,11 @@
+/* Oliver Huang [ohlbur] & Casey Culbertson [casey534]
+ * Prof. Hussein
+ * EE 469
+ * 6April 2023
+ * Lab 1 - DE1_SoC.sv
+ */
+
+ // testbench for reg_file
 module reg_file_testbench();
 
 	logic clk, wr_en;
@@ -13,7 +21,7 @@ module reg_file_testbench();
 		clk <= 0;
 		repeat(250) #(clock_period /2) clk <= ~clk;
 				
-	end //initial
+	end
 
    
 	initial begin

@@ -1,3 +1,11 @@
+/* Oliver Huang [ohlbur] & Casey Culbertson [casey534]
+ * Prof. Hussein
+ * EE 469
+ * 6April 2023
+ * Lab 1 - DE1_SoC.sv
+ */
+
+// testbench for alu
 module alu_testbench();
 
 	logic clk;
@@ -5,43 +13,31 @@ module alu_testbench();
    logic [1:0] ALUControl;
 	logic [31:0] Result;
 	logic [3:0] ALUFlags;
+	logic [103:0] testvectors [1000:0];
 	
 	alu dut (.*);
 
     //clock setup
 	parameter clock_period = 100;
 	
+	initial clk = 1;
+	always begin
+		#(clock_period/2);
+		clk = ~clk;
+	end
+	
+
+	
 	initial begin
-		clk <= 0;
-		repeat(250) #(clock_period /2) clk <= ~clk;
-				
-	end //initial
-
-
-    
-	initial begin
-		@(posedge clk);
-      ALUControl<=2'b00; a<=32'h00000000; b<=32'h00000000; @(posedge clk);
-														b<=32'hFFFFFFFF; @(posedge clk);
-							    a<=32'h00000001;                  @(posedge clk);
-							    a<=32'h000000FF; b<=32'h00000001; @(posedge clk);
-								 
-		ALUControl<=2'b01; a<=32'h00000000; b<=32'h00000000; @(posedge clk);
-														b<=32'hFFFFFFFF; @(posedge clk);
-								 a<=32'h00000001; b<=32'h00000001; @(posedge clk);
-								 a<=32'h00000100;                  @(posedge clk);
-
-		ALUControl<=2'b10; a<=32'hFFFFFFFF; b<=32'hFFFFFFFF; @(posedge clk);
-													   b<=32'h12345678; @(posedge clk);
-								 a<=32'h12345678; b<=32'h87654321; @(posedge clk);
-								 a<=32'h00000000; b<=32'hFFFFFFFF; @(posedge clk);
-								 
-		ALUControl<=2'b11; a<=32'hFFFFFFFF; 					  @(posedge clk);
-								 a<=32'h12345678; b<=32'h87654321; @(posedge clk);
-								 a<=32'h00000000; b<=32'hFFFFFFFF; @(posedge clk);
-								                  b<=32'h00000000; @(posedge clk);		 
-		$stop;
+		// read test vector from file
+		$readmemh("alu.tv", testvectors);
 		
+		// run tests
+		for(int i = 0; i < 20; i = i + 1) begin
+			{ALUControl, a, b, Result, ALUFlags} = testvectors[i]; @(posedge clk);
+		end
+		
+		$stop;
 	end
 	
 endmodule

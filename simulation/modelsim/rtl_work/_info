@@ -8,53 +8,78 @@ z2
 !i10f 100
 cModel Technology
 Z0 dC:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/simulation/modelsim
-vreg_file
+valu
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1680816738
+Z2 !s110 1680821175
 !i10b 1
-!s100 Rg8inYbf;NDz@O]n3C8Ec2
-ISV;WRZTiLKfVRRIO0>l4V2
+!s100 S?2I1d?9lXRdQmHNk1d=c0
+I`9D^dJ`U_6NTDk>K4QO9C1
 Z3 VDg1SIo80bB@j0V0VzS_@n1
-!s105 reg_file_sv_unit
+Z4 !s105 alu_sv_unit
 S1
 R0
-w1680646157
-8C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file.sv
-FC:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file.sv
-L0 1
-Z4 OV;L;10.5b;63
+Z5 w1680820338
+Z6 8C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu.sv
+Z7 FC:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu.sv
+L0 4
+Z8 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z5 !s108 1680816738.000000
-!s107 C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab|C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file.sv|
+Z9 !s108 1680821175.000000
+Z10 !s107 C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu.sv|
+Z11 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab|C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu.sv|
 !i113 1
-Z6 o-sv -work work
-Z7 !s92 -sv -work work {+incdir+C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab}
-Z8 tCvgOpt 0
-vreg_file_testbench
+Z12 o-sv -work work
+Z13 !s92 -sv -work work {+incdir+C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab}
+Z14 tCvgOpt 0
+valu_testbench
 R1
 R2
 !i10b 1
-!s100 SQl3eLMi0_QD]gnz9QS=]1
-IA7>GzAnPh]J_P0EKURC3C2
+!s100 AO:U6S;]P`dCb:aaNoFd]0
+I2k0UKzheRLiiIISIkP_>P1
 R3
-!s105 reg_file_testbench_sv_unit
+!s105 alu_testbench_sv_unit
 S1
 R0
-w1680816046
-8C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv
-FC:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv
+w1680821133
+8C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv
+FC:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv
 L0 1
-R4
+R8
 r1
 !s85 0
 31
-R5
-!s107 C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab|C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/reg_file_testbench.sv|
+R9
+!s107 C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab|C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/alu_testbench.sv|
 !i113 1
+R12
+R13
+R14
+valu_testbench2
+R1
+R2
+!i10b 1
+!s100 HLIhU:jZVA_QzLc_<oQ8Y2
+Ia:^gJzN?M]XBM[3U8@KT50
+R3
+R4
+S1
+R0
+R5
 R6
 R7
+L0 28
 R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+R14

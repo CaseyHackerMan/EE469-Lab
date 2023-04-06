@@ -1,0 +1,49 @@
+# Reading C:/intelFPGA_lite/17.0/modelsim_ase/tcl/vsim/pref.tcl
+do run_alu.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:04:01 on Apr 06,2023
+# vlog -reportprogress 300 -work work ./alu.sv 
+# -- Compiling module alu
+# -- Compiling module alu_testbench2
+# 
+# Top level modules:
+# 	alu_testbench2
+# End time: 16:04:01 on Apr 06,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:04:01 on Apr 06,2023
+# vlog -reportprogress 300 -work work ./alu_testbench.sv 
+# -- Compiling module alu_testbench
+# 
+# Top level modules:
+# 	alu_testbench
+# End time: 16:04:01 on Apr 06,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -t 1fs -novopt alu_testbench -L unisim -L secureip -L unifast -L unimacro 
+# Start time: 16:04:01 on Apr 06,2023
+# Loading sv_std.std
+# Loading work.alu_testbench
+# ** Error (suppressible): (vsim-19) Failed to access library 'unisim' at "unisim".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'secureip' at "secureip".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unifast' at "unifast".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unimacro' at "unimacro".
+# No such file or directory. (errno = ENOENT)
+# Loading work.alu
+# ** Warning: (vsim-3839) ./alu_testbench.sv(27): Variable '/alu_testbench/Result', driven via a port connection, is multiply driven. See ./alu_testbench.sv(10).
+#    Time: 0 fs  Iteration: 0  Instance: /alu_testbench File: ./alu_testbench.sv
+# ** Warning: (vsim-3839) ./alu_testbench.sv(27): Variable '/alu_testbench/ALUFlags', driven via a port connection, is multiply driven. See ./alu_testbench.sv(10).
+#    Time: 0 fs  Iteration: 0  Instance: /alu_testbench File: ./alu_testbench.sv
+# .main_pane.objects.interior.cs.body.tree
+# .main_pane.wave.interior.cs.body.pw.wf
+# ** Warning: (vsim-7) Failed to open readmem file "alu.tv" in read mode.
+# No such file or directory. (errno = ENOENT)    : ./alu_testbench.sv(24)
+#    Time: 0 fs  Iteration: 0  Instance: /alu_testbench
+# ** Note: $stop    : ./alu_testbench.sv(30)
+#    Time: 2 ps  Iteration: 1  Instance: /alu_testbench
+# Break in Module alu_testbench at ./alu_testbench.sv line 30
+# End time: 16:06:19 on Apr 06,2023, Elapsed time: 0:02:18
+# Errors: 4, Warnings: 3
