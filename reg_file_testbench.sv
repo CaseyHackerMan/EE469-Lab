@@ -15,23 +15,28 @@ module reg_file_testbench();
 				
 	end //initial
 
-
-    
+   
 	initial begin
-        // test 1
-		wr_en <= 1; write_addr = 4'b1010; write_data = {32{1'b1}}; @(posedge clk);
-                    write_addr = 4'b0100; write_data = {16{2'b01}}; @(posedge clk);
-        @(posedge clk);
+      // test 1
+		wr_en = 1'b0;
+		read_addr1 = 4'b0000; read_addr2 = 4'b0000;
+		write_addr = 4'b1010; write_data = {32{1'b1}}; @(posedge clk);
+		wr_en = 1'b1; @(posedge clk);
+		@(posedge clk);
+      write_addr = 4'b0100; write_data = {16{2'b01}}; @(posedge clk);
+      @(posedge clk);
+		wr_en = 1'b0;
 
-        //test 2
-        wr_en <= 0;  @(posedge clk);
-        read_addr1 = 4'b1010; read_addr2 = 4'b0100; @(posedge clk);
-        
-        // test 3
-        read_addr2 = 4'b1010; @(posedge clk);
-        wr_en <= 1; write_addr = 4'b1010; write_data = {32{1'b0}}; @(posedge clk);
-        
-        @(posedge clk);
+      //test 2
+      read_addr1 = 4'b1010; read_addr2 = 4'b0100; @(posedge clk);
+     
+      // test 3
+		wr_en = 1'b1; 
+		read_addr1 = 4'b1111; read_addr2 = 4'b1111;
+		@(posedge clk);
+		write_addr = 4'b1111; write_data = {32{1'b0}}; @(posedge clk);
+      @(posedge clk);
+		@(posedge clk);
 
 		$stop;
 		
