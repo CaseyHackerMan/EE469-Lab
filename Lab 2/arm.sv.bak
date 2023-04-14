@@ -60,14 +60,14 @@ module arm (
     // TODO: insert your reg file here
     // TODO: instantiation comment
     reg_file u_reg_file (
-        .clk       (clk), 
-        .wr_en     (RegWrite),
-        .write_data(Result),
-        .write_addr(Instr[15:12]),
-        .read_addr1(RA1), 
-        .read_addr2(RA2),
-        .read_data1(RD1), 
-        .read_data2(RD2)
+        .clk       (), 
+        .wr_en     (),
+        .write_data(),
+        .write_addr(),
+        .read_addr1(), 
+        .read_addr2(),
+        .read_data1(), 
+        .read_data2()
     );
 
     // two muxes, put together into an always_comb for clarity
@@ -86,11 +86,11 @@ module arm (
     // TODO: insert your alu here
     // TODO: instantiation comment
     alu u_alu (
-        .a          (SrcA), 
-        .b          (SrcB),
-        .ALUControl (ALUControl),
-        .Result     (ALUResult),
-        .ALUFlags   (ALUFlags)
+        .a          (), 
+        .b          (),
+        .ALUControl (),
+        .Result     (),
+        .ALUFlags   ()
     );
 
     // determine the result to run back to PC or the register file based on whether we used a memory instruction

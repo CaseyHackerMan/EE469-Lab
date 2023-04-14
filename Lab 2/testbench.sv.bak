@@ -10,7 +10,7 @@ module testbench();
     // generate clock with 100ps clk period 
     initial begin
         clk = '1;
-        repeat(250) #50 clk = ~clk;
+        forever #50 clk = ~clk;
     end
 
     // processor instantion. Within is the processor as well as imem and dmem

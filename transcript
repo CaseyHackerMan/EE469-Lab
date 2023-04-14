@@ -1,0 +1,147 @@
+# Reading C:/intelFPGA_lite/17.0/modelsim_ase/tcl/vsim/pref.tcl
+do sim.do
+# Cannot open macro file: sim.do
+cd Lab2
+# couldn't change working directory to "Lab2": no such file or directory
+pwd
+# C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab
+cd "Lab 2"
+do sim.do
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:33:36 on Apr 14,2023
+# vlog -reportprogress 300 -work work ./reg_file.sv 
+# -- Compiling module reg_file
+# 
+# Top level modules:
+# 	reg_file
+# End time: 12:33:36 on Apr 14,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:33:36 on Apr 14,2023
+# vlog -reportprogress 300 -work work ./alu.sv 
+# -- Compiling module alu
+# 
+# Top level modules:
+# 	alu
+# End time: 12:33:36 on Apr 14,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:33:36 on Apr 14,2023
+# vlog -reportprogress 300 -work work ./top.sv 
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# End time: 12:33:36 on Apr 14,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:33:36 on Apr 14,2023
+# vlog -reportprogress 300 -work work ./testbench.sv 
+# -- Compiling module testbench
+# 
+# Top level modules:
+# 	testbench
+# End time: 12:33:36 on Apr 14,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:33:36 on Apr 14,2023
+# vlog -reportprogress 300 -work work ./imem.sv 
+# -- Compiling module imem
+# 
+# Top level modules:
+# 	imem
+# End time: 12:33:36 on Apr 14,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:33:36 on Apr 14,2023
+# vlog -reportprogress 300 -work work ./dmem.sv 
+# -- Compiling module dmem
+# 
+# Top level modules:
+# 	dmem
+# End time: 12:33:36 on Apr 14,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:33:36 on Apr 14,2023
+# vlog -reportprogress 300 -work work ./arm.sv 
+# -- Compiling module arm
+# 
+# Top level modules:
+# 	arm
+# End time: 12:33:36 on Apr 14,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -t 1ps -novopt testbench -L unisim -L secureip -L unifast -L unimacro -Lf altera_mf_ver 
+# Start time: 12:33:36 on Apr 14,2023
+# Loading sv_std.std
+# Loading work.testbench
+# ** Error (suppressible): (vsim-19) Failed to access library 'unisim' at "unisim".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'secureip' at "secureip".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unifast' at "unifast".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unimacro' at "unimacro".
+# No such file or directory. (errno = ENOENT)
+# Loading work.top
+# ** Error (suppressible): (vsim-19) Failed to access library 'unisim' at "unisim".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'secureip' at "secureip".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unifast' at "unifast".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unimacro' at "unimacro".
+# No such file or directory. (errno = ENOENT)
+# Loading work.arm
+# ** Error (suppressible): (vsim-19) Failed to access library 'unisim' at "unisim".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'secureip' at "secureip".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unifast' at "unifast".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unimacro' at "unimacro".
+# No such file or directory. (errno = ENOENT)
+# Loading work.reg_file
+# ** Error (suppressible): (vsim-19) Failed to access library 'unisim' at "unisim".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'secureip' at "secureip".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unifast' at "unifast".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unimacro' at "unimacro".
+# No such file or directory. (errno = ENOENT)
+# Loading work.alu
+# ** Error (suppressible): (vsim-19) Failed to access library 'unisim' at "unisim".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'secureip' at "secureip".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unifast' at "unifast".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unimacro' at "unimacro".
+# No such file or directory. (errno = ENOENT)
+# Loading work.imem
+# ** Error (suppressible): (vsim-19) Failed to access library 'unisim' at "unisim".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'secureip' at "secureip".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unifast' at "unifast".
+# No such file or directory. (errno = ENOENT)
+# ** Error (suppressible): (vsim-19) Failed to access library 'unimacro' at "unimacro".
+# No such file or directory. (errno = ENOENT)
+# Loading work.dmem
+# .main_pane.objects.interior.cs.body.tree
+# .main_pane.wave.interior.cs.body.pw.wf
+add wave -position end  sim:/testbench/cpu/clk
+add wave -position end  sim:/testbench/cpu/rst
+add wave -position end  sim:/testbench/cpu/Instr
+add wave -position end  sim:/testbench/cpu/ReadData
+add wave -position end  sim:/testbench/cpu/WriteData
+add wave -position end  sim:/testbench/cpu/PC
+add wave -position end  sim:/testbench/cpu/ALUResult
+add wave -position end  sim:/testbench/cpu/MemWrite
+run -all
+# Task 1 Passed
+# ** Note: $stop    : ./testbench.sv(38)
+#    Time: 5200 ps  Iteration: 1  Instance: /testbench
+# Break in Module testbench at ./testbench.sv line 38
+# End time: 12:35:45 on Apr 14,2023, Elapsed time: 0:02:09
+# Errors: 24, Warnings: 0
