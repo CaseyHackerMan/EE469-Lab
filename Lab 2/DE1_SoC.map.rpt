@@ -1,5 +1,5 @@
 Analysis & Elaboration report for DE1_SoC
-Fri Apr 14 12:29:44 2023
+Wed Apr 19 12:25:14 2023
 Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
 
 
@@ -37,10 +37,10 @@ agreement for further details.
 +-----------------------------------------------------------------------------+
 ; Analysis & Elaboration Summary                                              ;
 +-------------------------------+---------------------------------------------+
-; Analysis & Elaboration Status ; Failed - Fri Apr 14 12:29:44 2023           ;
+; Analysis & Elaboration Status ; Failed - Wed Apr 19 12:25:14 2023           ;
 ; Quartus Prime Version         ; 17.0.0 Build 595 04/25/2017 SJ Lite Edition ;
 ; Revision Name                 ; DE1_SoC                                     ;
-; Top-level Entity Name         ; testbench                                   ;
+; Top-level Entity Name         ; top                                         ;
 ; Family                        ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)   ; N/A until Partition Merge                   ;
 ; Total registers               ; N/A until Partition Merge                   ;
@@ -74,7 +74,7 @@ agreement for further details.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CGXFC7C7F23C8     ;                    ;
-; Top-level entity name                                                           ; testbench          ; DE1_SoC            ;
+; Top-level entity name                                                           ; top                ; DE1_SoC            ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation      ; On                 ; On                 ;
@@ -161,7 +161,7 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Elaboration
     Info: Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
-    Info: Processing started: Fri Apr 14 12:29:35 2023
+    Info: Processing started: Wed Apr 19 12:24:57 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE1_SoC -c DE1_SoC --analysis_and_elaboration
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -179,14 +179,21 @@ Info (12021): Found 1 design units, including 1 entities, in source file dmem.sv
     Info (12023): Found entity 1: dmem File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/dmem.sv Line: 13
 Info (12021): Found 1 design units, including 1 entities, in source file arm.sv
     Info (12023): Found entity 1: arm File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/arm.sv Line: 13
-Info (12127): Elaborating entity "testbench" for the top level hierarchy
-Error (10207): Verilog HDL error at testbench.sv(31): can't resolve reference to object "memory" File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/testbench.sv Line: 31
-Warning (10175): Verilog HDL warning at testbench.sv(38): ignoring unsupported system task File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/testbench.sv Line: 38
-Error (12153): Can't elaborate top-level user hierarchy
-Error: Quartus Prime Analysis & Elaboration was unsuccessful. 2 errors, 2 warnings
-    Error: Peak virtual memory: 4762 megabytes
-    Error: Processing ended: Fri Apr 14 12:29:44 2023
-    Error: Elapsed time: 00:00:09
-    Error: Total CPU time (on all processors): 00:00:23
+Info (12127): Elaborating entity "top" for the top level hierarchy
+Info (12128): Elaborating entity "arm" for hierarchy "arm:processor" File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/top.sv Line: 30
+Warning (10230): Verilog HDL assignment warning at arm.sv(143): truncated value with size 32 to match size of target (2) File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/arm.sv Line: 143
+Warning (10230): Verilog HDL assignment warning at arm.sv(156): truncated value with size 32 to match size of target (2) File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/arm.sv Line: 156
+Warning (10230): Verilog HDL assignment warning at arm.sv(182): truncated value with size 32 to match size of target (2) File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/arm.sv Line: 182
+Warning (10230): Verilog HDL assignment warning at arm.sv(195): truncated value with size 32 to match size of target (2) File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/arm.sv Line: 195
+Info (12128): Elaborating entity "reg_file" for hierarchy "arm:processor|reg_file:u_reg_file" File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/arm.sv Line: 76
+Info (12128): Elaborating entity "alu" for hierarchy "arm:processor|alu:u_alu" File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/arm.sv Line: 99
+Info (12128): Elaborating entity "imem" for hierarchy "imem:imemory" File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/top.sv Line: 38
+Error (10170): Verilog HDL syntax error at memfile.dat(12) near text: _. Check for and fix any syntax errors that appear immediately before or at the specified keyword. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/memfile.dat Line: 12
+Error (12152): Can't elaborate user hierarchy "imem:imemory" File: C:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2/top.sv Line: 38
+Error: Quartus Prime Analysis & Elaboration was unsuccessful. 2 errors, 5 warnings
+    Error: Peak virtual memory: 4766 megabytes
+    Error: Processing ended: Wed Apr 19 12:25:14 2023
+    Error: Elapsed time: 00:00:17
+    Error: Total CPU time (on all processors): 00:00:41
 
 

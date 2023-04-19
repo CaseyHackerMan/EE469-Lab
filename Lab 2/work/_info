@@ -10,7 +10,7 @@ cModel Technology
 Z0 dC:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 2
 valu
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1681500816
+Z2 !s110 1681925872
 !i10b 1
 !s100 KUjMT]74M^o7PAbc`nB5_1
 I_0ImloKCLa<2aD<=JzEZi3
@@ -26,7 +26,7 @@ Z6 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z7 !s108 1681500816.000000
+Z7 !s108 1681925872.000000
 !s107 ./alu.sv|
 !s90 -reportprogress|300|-work|work|./alu.sv|
 !i113 1
@@ -34,7 +34,7 @@ Z8 o-work work
 Z9 tCvgOpt 0
 varm
 R1
-R2
+Z10 !s110 1681925873
 !i10b 1
 !s100 n4`J4a5SazT:iBnA9Voz02
 IhDFSibF?1N:=7IR2]11:>1
@@ -50,7 +50,7 @@ R6
 r1
 !s85 0
 31
-R7
+Z11 !s108 1681925873.000000
 !s107 ./arm.sv|
 !s90 -reportprogress|300|-work|work|./arm.sv|
 !i113 1
@@ -58,7 +58,7 @@ R8
 R9
 vdmem
 R1
-R2
+R10
 !i10b 1
 !s100 Oh:]]J_E8maKR390g`9n92
 I_0U;LLRk3P4``G4YgE:031
@@ -74,7 +74,7 @@ R6
 r1
 !s85 0
 31
-R7
+R11
 !s107 ./dmem.sv|
 !s90 -reportprogress|300|-work|work|./dmem.sv|
 !i113 1
@@ -82,7 +82,7 @@ R8
 R9
 vimem
 R1
-R2
+R10
 !i10b 1
 !s100 [28JEdGYc^2]KnWmGd?l13
 I?jkZ_7[KP1THnSlCVeA:h1
@@ -90,7 +90,7 @@ R3
 !s105 imem_sv_unit
 S1
 R0
-R4
+w1681925206
 8./imem.sv
 F./imem.sv
 L0 15
@@ -98,7 +98,7 @@ R6
 r1
 !s85 0
 31
-R7
+R11
 !s107 ./imem.sv|
 !s90 -reportprogress|300|-work|work|./imem.sv|
 !i113 1
@@ -130,7 +130,7 @@ R8
 R9
 vtestbench
 R1
-R2
+R10
 !i10b 1
 !s100 cFT`[IQoh9a4CCHjZF3Tg3
 I]GFJ7Ah2CnJPciWM9zmGU0

@@ -8,20 +8,24 @@ vlog -work work ./imem.sv
 vlog -work work ./dmem.sv
 vlog -work work ./arm.sv
 
-
 # Note that the name of the testbench module is in this statement. If you're running a testbench with a different name CHANGE IT
 vsim -t 1ps -novopt testbench -L unisim -L secureip -L unifast -L unimacro -Lf altera_mf_ver
 
 view signals
 view wave
 
-# add wave -position end  sim:/ram_1port_testbench/clk
-# add wave -position end  sim:/ram_1port_testbench/Write
-# add wave -position end  sim:/ram_1port_testbench/Address
-# add wave -position end  sim:/ram_1port_testbench/DataIn
-# add wave -position end  sim:/ram_1port_testbench/DataOut1
-# add wave -position end  sim:/ram_1port_testbench/DataOut2
+add wave -position end  sim:/testbench/cpu/clk
+add wave -position end  sim:/testbench/cpu/rst
+add wave -position end  sim:/testbench/cpu/PC
+add wave -position end  sim:/testbench/cpu/Instr
+add wave -position end  sim:/testbench/cpu/ALUResult
+add wave -position end  sim:/testbench/cpu/WriteData
+add wave -position end  sim:/testbench/cpu/MemWrite
+add wave -position end  sim:/testbench/cpu/ReadData
 
-# radix signal sim:/ram_1port_testbench/Address hexadecimal
+radix signal sim:/testbench/cpu/ReadData hexadecimal
+radix signal sim:/testbench/cpu/WriteData hexadecimal
+radix signal sim:/testbench/cpu/PC hexadecimal
+radix signal sim:/testbench/cpu/ALUResult hexadecimal
 
-# run -all
+run -all
