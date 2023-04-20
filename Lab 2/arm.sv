@@ -50,7 +50,7 @@ module arm (
     always_ff @(posedge clk) begin
         if (rst) PC <= '0;
         else     PC <= PCPrime;
-    end
+	 end
 	 
 	always_ff @(posedge clk) begin
 		if (FlagWrite[0]) FlagsReg[1:0] <= ALUFlags[1:0];

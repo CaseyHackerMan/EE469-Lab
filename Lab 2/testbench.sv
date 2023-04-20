@@ -28,12 +28,12 @@ module testbench();
         // simulation and code will be made.
 
         // task 1:
-        assert(cpu.processor.u_reg_file.memory[8] == 32'd11) $display("Task 1 Passed");
-        else                                                 $display("Task 1 Failed");
+        // assert(cpu.processor.u_reg_file.memory[8] == 32'd11) $display("Task 1 Passed");
+        // else                                                 $display("Task 1 Failed");
 
         // task 2:
-        //assert(cpu.processor.u_reg_file.memory[8] == 32'd1)  $display("Task 2 Passed");
-        //else                                                 $display("Task 2 Failed");
+        assert(cpu.processor.u_reg_file.memory[8] == 32'd1)  $display("Task 2 Passed");
+        else                                                 $display("Task 2 Failed");
 
         $stop;
     end
