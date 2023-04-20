@@ -29,7 +29,7 @@ module arm (
 
     // control signals
     logic PCSrc, MemtoReg, ALUSrc, RegWrite, CondEx;
-    logic [1:0] RegSrc, ImmSrc, ALUControl, FlagWrite;
+	logic [1:0] RegSrc, ImmSrc, ALUControl, FlagWrite;
 	logic [3:0] FlagsReg;
 
 
@@ -52,6 +52,7 @@ module arm (
         else     PC <= PCPrime;
 	 end
 	 
+	 // writing to flag registers
 	always_ff @(posedge clk) begin
 		if (FlagWrite[0]) FlagsReg[1:0] <= ALUFlags[1:0];
 		if (FlagWrite[1]) FlagsReg[3:2] <= ALUFlags[3:2];
@@ -110,7 +111,7 @@ module arm (
     //                                      CONTROL
     //-------------------------------------------------------------------------------
 	 
-	// N, Z, C, V
+	// sets conditional excecution based on conditional and flags (N, Z, C, V)
 	always_comb begin
 		case (Instr[31:28])
 			4'b0000 : CondEx = FlagsReg[2]; // EQ
@@ -123,7 +124,7 @@ module arm (
 		endcase
 	end
 				
-    
+    // set contol signals 
     always_comb begin
 		if (CondEx) begin
 			casez (Instr[27:20])

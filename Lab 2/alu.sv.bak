@@ -3,8 +3,8 @@
 /* Oliver Huang [ohlbur] & Casey Culbertson [casey534]
  * Prof. Hussein
  * EE 469
- * April 2023
- * Lab 2 - alu.sv
+ * 6April 2023
+ * Lab 1 - DE1_SoC.sv
  */
 
 // Implements an ALU with controls for addition, subtraction,

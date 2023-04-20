@@ -2,7 +2,7 @@
  * Prof. Hussein
  * EE 469
  * 6 April 2023
- * Lab 1 - DE1_SoC.sv
+ * Lab 2 - reg_file.sv
  */
 
 // implements a 16x32 register file with
