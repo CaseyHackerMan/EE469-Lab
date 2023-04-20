@@ -1,5 +1,3 @@
-// Implements an ALU with controls for addition, subtraction,
-// bitwise AND, and bitwise OR. Has negative, zero, cout, 
 /* Oliver Huang [ohlbur] & Casey Culbertson [casey534]
  * Prof. Hussein
  * EE 469

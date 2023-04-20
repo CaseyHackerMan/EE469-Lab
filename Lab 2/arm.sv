@@ -1,4 +1,5 @@
-/* arm is the spotlight of the show and contains the bulk of the datapath and control logic. This module is split into two parts, the datapath and control. 
+/* arm is the spotlight of the show and contains the bulk of the datapath and
+**	control logic. This module is split into two parts, the datapath and control. 
 */
 
 // clk - system clock
@@ -33,9 +34,10 @@ module arm (
 	logic [3:0] FlagsReg;
 
 
-    /* The datapath consists of a PC as well as a series of muxes to make decisions about which data words to pass forward and operate on. It is 
-    ** noticeably missing the register file and alu, which you will fill in using the modules made in lab 1. To correctly match up signals to the 
-    ** ports of the register file and alu take some time to study and understand the logic and flow of the datapath.
+    /* The datapath consists of a PC as well as a series of muxes to make decisions about which data words
+	 ** to pass forward and operate on. It is noticeably missing the register file and alu, which you will 
+	 ** fill in using the modules made in lab 1. To correctly match up signals to the ports of the register
+	 ** file and alu take some time to study and understand the logic and flow of the datapath.
     */
     //-------------------------------------------------------------------------------
     //                                      DATAPATH
@@ -79,15 +81,19 @@ module arm (
     // two muxes, put together into an always_comb for clarity
     // determines which set of instruction bits are used for the immediate
     always_comb begin
-        if      (ImmSrc == 'b00) ExtImm = {{24{Instr[7]}},Instr[7:0]};          // 8 bit immediate - reg operations
-        else if (ImmSrc == 'b01) ExtImm = {20'b0, Instr[11:0]};                 // 12 bit immediate - mem operations
-        else                     ExtImm = {{6{Instr[23]}}, Instr[23:0], 2'b00}; // 24 bit immediate - branch operation
+        if      (ImmSrc == 'b00) 
+							ExtImm = {{24{Instr[7]}},Instr[7:0]};          // 8 bit immediate - reg operations
+        else if (ImmSrc == 'b01)
+							ExtImm = {20'b0, Instr[11:0]};                 // 12 bit immediate - mem operations
+        else         ExtImm = {{6{Instr[23]}}, Instr[23:0], 2'b00}; // 24 bit immediate - branch operation
     end
 
-    // WriteData and SrcA are direct outputs of the register file, wheras SrcB is chosen between reg file output and the immediate
+    // WriteData and SrcA are direct outputs of the register file,
+	 // wheras SrcB is chosen between reg file output and the immediate
     assign WriteData = (RA2 == 'd15) ? PCPlus8 : RD2;           // substitute the 15th regfile register for PC 
     assign SrcA      = (RA1 == 'd15) ? PCPlus8 : RD1;           // substitute the 15th regfile register for PC 
-    assign SrcB      = ALUSrc        ? ExtImm  : WriteData;     // determine alu operand to be either from reg file or from immediate
+    assign SrcB      = ALUSrc        ? ExtImm  : WriteData;     // determine alu operand to be either from reg 
+																					 //  file or from immediate
 
     
     // instantiates the alu
@@ -100,12 +106,14 @@ module arm (
     );
 
     // determine the result to run back to PC or the register file based on whether we used a memory instruction
-    assign Result = MemtoReg ? ReadData : ALUResult;    // determine whether final writeback result is from dmemory or alu
+    assign Result = MemtoReg ? ReadData : ALUResult;  // determine whether final writeback result is 
+																		//  from dmemory or alu
 
 
-    /* The control conists of a large decoder, which evaluates the top bits of the instruction and produces the control bits 
-    ** which become the select bits and write enables of the system. The write enables (RegWrite, MemWrite and PCSrc) are 
-    ** especially important because they are representative of your processors current state. 
+    /* The control conists of a large decoder, which evaluates the top bits of the instruction and 
+	 ** produces the control bits which become the select bits and write enables of the system. The 
+	 ** write enables (RegWrite, MemWrite and PCSrc) are especially important because they are 
+	 ** representative of your processors current state. 
     */
     //-------------------------------------------------------------------------------
     //                                      CONTROL
