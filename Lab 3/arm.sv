@@ -4,7 +4,7 @@
 
 // clk - system clock
 // rst - system reset
-// Instr - incoming 32 bit instruction from imem, contains opcode, condition, addresses and or immediates
+// InstrF - incoming 32 bit instruction from imem, contains opcode, condition, addresses and or immediates
 // ReadData - data read out of the dmem
 // WriteData - data to be written to the dmem
 // MemWrite - write enable to allowed WriteData to overwrite an existing dmem word
@@ -13,25 +13,31 @@
 
 module arm (
     input  logic        clk, rst,
-    input  logic [31:0] Instr,
-    input  logic [31:0] ReadData,
-    output logic [31:0] WriteData, 
-    output logic [31:0] PC, ALUResult,
-    output logic        MemWrite
+	input  logic [31:0] InstrF,
+	input  logic [31:0] ReadDataM,
+	output logic [31:0] WriteDataM, 
+	output logic [31:0] PCF, ALUOutM,
+    output logic        MemWriteM
 );
 
 	// datapath buses and signals
-	logic [31:0] PCPrime, PCPlus4, PCPlus8; // pc signals
-	logic [ 3:0] RA1, RA2;                  // regfile input addresses
-	logic [31:0] RD1, RD2;                  // raw regfile outputs
+	logic [31:0] PCPrime, PCPlus4F, PCPlus8; // pc signals
+	logic [31:0] InstrD;
+	logic [ 3:0] RA1D, RA2D;                  // regfile input addresses
+	logic [31:0] RD1D, RD2D;                  // raw regfile outputs
+	logic [31:0] RD1E, RD2E;                  // raw regfile outputs
+	logic [ 3:0] WA3E, WA3M, WA3W;            // regfile write address
 	logic [ 3:0] ALUFlags;                  // alu combinational flag outputs
-	logic [31:0] ExtImm, SrcA, SrcB;        // immediate and alu inputs 
-	logic [31:0] Result;                    // computed or fetched value to be written into regfile or pc
+	logic [31:0] ExtImmD, ExtImmE, SrcA, SrcB;        // immediate and alu inputs 
+	logic [31:0] ResultW;                    // computed or fetched value to be written into regfile or pc
+
 
 	// control signals
-	logic PCSrc, MemtoReg, ALUSrc, RegWrite, CondEx;
-	logic [1:0] RegSrc, ImmSrc, ALUControl, FlagWrite;
-	logic [3:0] FlagsReg;
+	logic PCSrcD, RegWriteD, MemtoRegD, MemWriteD, BranchD, ALUSrcD, CondEx;
+	logic PCSrcE, RegWriteE, MemtoRegE, MemWriteE, ALUSrcE, 
+	logic [1:0] RegSrcD, ImmSrcD, ALUControlD, FlagWriteD;
+	logic [3:0] Flags, FlagsE; //prev FlagsReg
+	logic [3:0] CondE, 
 
 
     /* The datapath consists of a PC as well as a series of muxes to make decisions about which data words
@@ -43,10 +49,24 @@ module arm (
     //                                      DATAPATH
     //-------------------------------------------------------------------------------
 
+	always_ff @(posedge clk) begin
+		InstrD <= InstrF;
+		PCPlus8 <= PCPlus4F + 'd4;
+		RD1E <= RD1D;
+		RD2E <= RD2D;
+		WA3E <= InstrD[15:12];
+		WA3M <= WA3E;
+		WA3W <= WA3M;
+		ExtImmE <= ExtImmD;
+		ALUOutM <= ALUResultE;
+		WriteDataM <= WriteDataE;
+		ALUOutW <= ALUOutM;
+		ReadDataW <= ReadDataM;
+	end
 
 	assign PCPrime = PCSrc ? Result : PCPlus4;  // mux, use either default or newly computed value
-	assign PCPlus4 = PC + 'd4;                  // default value to access next instruction
-	assign PCPlus8 = PCPlus4 + 'd4;             // value read when reading from reg[15]
+	assign PCPlus4F = PCF + 'd4;                  // default value to access next instruction
+	// assign PCPlus8 = PCPlus4 + 'd4;             // value read when reading from reg[15]
 
 	// update the PC, at rst initialize to 0
 	always_ff @(posedge clk) begin
@@ -63,50 +83,60 @@ module arm (
 	// determine the register addresses based on control signals
 	// RegSrc[0] is set if doing a branch instruction
 	// RefSrc[1] is set when doing memory instructions
-	assign RA1 = RegSrc[0] ? 4'd15        : Instr[19:16];
-	assign RA2 = RegSrc[1] ? Instr[15:12] : Instr[ 3: 0];
+	assign RA1D = RegSrc[0] ? 4'd15        : InstrD[19:16];
+	assign RA2D = RegSrc[1] ? InstrD[15:12] : InstrD[ 3: 0];
 
 	// instantiates the registers
 	reg_file u_reg_file (
-		.clk       (clk), 
-		.wr_en     (RegWrite),
-		.write_data(Result),
-		.write_addr(Instr[15:12]),
-		.read_addr1(RA1), 
-		.read_addr2(RA2),
-		.read_data1(RD1), 
-		.read_data2(RD2)
+		.clk       (~clk), 
+		.wr_en     (RegWriteW),
+		.write_data(ResultW),
+		.write_addr(WA3W),
+		.read_addr1(RA1D), 
+		.read_addr2(RA2D),
+		.read_data1(RD1D), 
+		.read_data2(RD2D)
 	);
 
 	// two muxes, put together into an always_comb for clarity
 	// determines which set of instruction bits are used for the immediate
 	always_comb begin
 		if      (ImmSrc == 'b00) 
-						ExtImm = {{24{Instr[7]}},Instr[7:0]};          // 8 bit immediate - reg operations
+						ExtImmD = {{24{InstrD[7]}},InstrD[7:0]};          // 8 bit immediate - reg operations
 		else if (ImmSrc == 'b01)
-						ExtImm = {20'b0, Instr[11:0]};                 // 12 bit immediate - mem operations
-		else         ExtImm = {{6{Instr[23]}}, Instr[23:0], 2'b00}; // 24 bit immediate - branch operation
+						ExtImmD = {20'b0, InstrD[11:0]};                 // 12 bit immediate - mem operations
+		else         ExtImmD = {{6{InstrD[23]}}, InstrD[23:0], 2'b00}; // 24 bit immediate - branch operation
 	end
 
 	// WriteData and SrcA are direct outputs of the register file,
 	// wheras SrcB is chosen between reg file output and the immediate
-	assign WriteData = (RA2 == 'd15) ? PCPlus8 : RD2;           // substitute the 15th regfile register for PC 
-	assign SrcA      = (RA1 == 'd15) ? PCPlus8 : RD1;           // substitute the 15th regfile register for PC 
-	assign SrcB      = ALUSrc        ? ExtImm  : WriteData;     // determine alu operand to be either from reg 
-																				 //  file or from immediate
+	always_comb begin
+		case(ForwardAE)
+			2'b00: SrcAE = RD1E;
+			2'b01: SrcAE = ResultW;
+			2'b10: SrcAE = ALUOutM;
+		endcase
 
+		SrcBE = ALUSrcE ? ExtImmE : WriteDataE;
+		
+		case(ForwardBE)
+			2'b00: WriteDataE = RD2E;
+			2'b01: WriteDataE = ResultW;
+			2'b10: WriteDataE = ALUOutM;
+		endcase
+	end
     
 	// instantiates the alu
 	alu u_alu (
 		.a          (SrcA), 
 		.b          (SrcB),
 		.ALUControl (ALUControl),
-		.Result     (ALUResult),
+		.Result     (ALUResultE),
 		.ALUFlags   (ALUFlags)
 	);
 
 	// determine the result to run back to PC or the register file based on whether we used a memory instruction
-	assign Result = MemtoReg ? ReadData : ALUResult;  // determine whether final writeback result is 
+	assign Result = MemtoReg ? ReadDataW : ALUOutW;  // determine whether final writeback result is 
 																	//  from dmemory or alu
 
 
@@ -118,10 +148,12 @@ module arm (
 	//-------------------------------------------------------------------------------
 	//                                      CONTROL
 	//-------------------------------------------------------------------------------
- 
+
+
+	
 	// sets conditional excecution based on conditional and flags (N, Z, C, V)
 	always_comb begin
-		case (Instr[31:28])
+		case (InstrD[31:28])
 			4'b0000 : CondEx = FlagsReg[2]; // EQ
 			4'b0001 : CondEx = ~FlagsReg[2];// NE
 			4'b1010 : CondEx = ~(FlagsReg[3] ^ FlagsReg[0]); // GE
@@ -135,19 +167,19 @@ module arm (
     // set contol signals 
     always_comb begin
 		if (CondEx) begin
-			casez (Instr[27:20])
+			casez (InstrD[27:20])
 	
 				// ADD/ADDS (Imm or Reg)
 				8'b00?_0100_? : begin   // bit 20 sets flags (ADDS), bit 25 decides immediate or reg
 					PCSrc    = 0;
 					MemtoReg = 0; 
 					MemWrite = 0; 
-					ALUSrc   = Instr[25]; // may use immediate
+					ALUSrc   = InstrD[25]; // may use immediate
 					RegWrite = 1;
 					RegSrc   = 'b00;
 					ImmSrc   = 'b00; 
 					ALUControl = 'b00;
-					FlagWrite = Instr[20] ? 'b11 : 'b00;
+					FlagWrite = InstrD[20] ? 'b11 : 'b00;
 				end
 	
 				// SUB/SUBS (Imm or Reg)
@@ -155,12 +187,12 @@ module arm (
 					PCSrc    = 0; 
 					MemtoReg = 0; 
 					MemWrite = 0; 
-					ALUSrc   = Instr[25]; // may use immediate
+					ALUSrc   = InstrD[25]; // may use immediate
 					RegWrite = 1;
 					RegSrc   = 'b00;
 					ImmSrc   = 'b00; 
 					ALUControl = 'b01;
-					FlagWrite = Instr[20] ? 'b11 : 'b00;
+					FlagWrite = InstrD[20] ? 'b11 : 'b00;
 				end
 				
 				// CMP (Imm or Reg)
@@ -168,7 +200,7 @@ module arm (
 					PCSrc    = 0; 
 					MemtoReg = 0; 
 					MemWrite = 0; 
-					ALUSrc   = Instr[25]; // may use immediate
+					ALUSrc   = InstrD[25]; // may use immediate
 					RegWrite = 1;
 					RegSrc   = 'b00;
 					ImmSrc   = 'b00; 
@@ -186,7 +218,7 @@ module arm (
 					RegSrc   = 'b00;
 					ImmSrc   = 'b00;    // doesn't matter
 					ALUControl = 'b10;  
-					FlagWrite = Instr[20] ? 'b10 : 'b00;
+					FlagWrite = InstrD[20] ? 'b10 : 'b00;
 				end
 	
 				// ORR/ORRS
@@ -199,7 +231,7 @@ module arm (
 					RegSrc   = 'b00;
 					ImmSrc   = 'b00;    // doesn't matter
 					ALUControl = 'b11;
-					FlagWrite = Instr[20] ? 'b10 : 'b00;
+					FlagWrite = InstrD[20] ? 'b10 : 'b00;
 				end
 	
 				// LDR
@@ -264,6 +296,6 @@ module arm (
 			ImmSrc   = 'b00; 
 			ALUControl = 'b00;  // do an add
 			FlagWrite  = 'b00;
-		end
-    end
+    	end
+	end
 endmodule

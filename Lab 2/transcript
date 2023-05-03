@@ -140,3 +140,5 @@ do task2.do
 # ** Note: $stop    : ./testbench.sv(38)
 #    Time: 5200 ps  Iteration: 1  Instance: /testbench
 # Break in Module testbench at ./testbench.sv line 38
+# End time: 15:47:50 on Apr 20,2023, Elapsed time: 2:39:49
+# Errors: 24, Warnings: 2

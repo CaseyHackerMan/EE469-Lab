@@ -11,30 +11,21 @@ module top(
 );
     
     // processor io signals
-    logic [31:0] Instr;
-    logic [31:0] ReadData;
-    logic [31:0] WriteData;
-    logic [31:0] PC, ALUResult;
+	logic [31:0] InstrF;
+	logic [31:0] ReadDataM;
+	logic [31:0] WriteDataM;
+	logic [31:0] PCF, ALUOutM;
     logic        MemWrite;
 
     // our single cycle arm processor
-    arm processor (
-        .clk        (clk        ), 
-        .rst        (rst        ),
-        .Instr      (Instr      ),
-        .ReadData   (ReadData   ),
-        .WriteData  (WriteData  ), 
-        .PC         (PC         ), 
-        .ALUResult  (ALUResult  ),
-        .MemWrite   (MemWrite   )
-    );
+	arm processor (.*);
 
     // instruction memory
     // contained machine code instructions which instruct processor on which operations to make
     // effectively a rom because our processor cannot write to it
     imem imemory (
-        .addr   (PC     ),
-        .instr  (Instr  )
+		.addr   (PCF    ),
+		.instr  (InstrF )
     );
 
     // data memory
@@ -42,9 +33,9 @@ module top(
     dmem dmemory (
         .clk     (clk       ), 
         .wr_en   (MemWrite  ),
-        .addr    (ALUResult ),
-        .wr_data (WriteData ),
-        .rd_data (ReadData  )
+		.addr    (ALUOutM   ),
+		.wr_data (WriteDataM),
+		.rd_data (ReadDataM )
     );
 
 
