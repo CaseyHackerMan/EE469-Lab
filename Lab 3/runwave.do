@@ -22,14 +22,19 @@ radix -hexadecimal
 
 add wave -position end  sim:/testbench/clk
 add wave -position end  sim:/testbench/rst
+add wave -position end  sim:/testbench/cpu/processor/PCF
+add wave -position end  sim:/testbench/cpu/processor/InstrF
 add wave -position end  sim:/testbench/cpu/processor/u_reg_file/memory
 add wave -position end  sim:/testbench/cpu/processor/FlagsE
 add wave -position end  sim:/testbench/cpu/processor/ALUFlags
+add wave -position end  sim:/testbench/cpu/processor/ALUResultE
+add wave -position end  sim:/testbench/cpu/processor/SrcAE
+add wave -position end  sim:/testbench/cpu/processor/SrcBE
+add wave -position end  sim:/testbench/cpu/processor/ALUOutM
 add wave -position end  sim:/testbench/cpu/processor/StallF
 add wave -position end  sim:/testbench/cpu/processor/StallD
 add wave -position end  sim:/testbench/cpu/processor/FlushD
 add wave -position end  sim:/testbench/cpu/processor/FlushE
-add wave -position end  sim:/testbench/cpu/processor/Match
 add wave -position end  sim:/testbench/cpu/processor/ForwardAE
 add wave -position end  sim:/testbench/cpu/processor/ForwardBE
 

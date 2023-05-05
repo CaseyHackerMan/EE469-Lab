@@ -10,7 +10,7 @@ cModel Technology
 Z0 dC:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 3
 valu
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1683318064
+Z2 !s110 1683323209
 !i10b 1
 !s100 HSKzMaSk]>Ed^hP4=6O@h2
 IoAlZV:L[M;kY1DPLSEiB?2
@@ -26,7 +26,7 @@ Z6 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z7 !s108 1683318064.000000
+Z7 !s108 1683323209.000000
 !s107 ./alu.sv|
 !s90 -reportprogress|300|-work|work|./alu.sv|
 !i113 1
@@ -36,13 +36,13 @@ varm
 R1
 R2
 !i10b 1
-!s100 jMzgPHGC6g^lUdzh6U>KD2
-IbfBklz=X:Pe8VLk[gZQXO0
+!s100 cm4Je?AB]91nb6^Mf8a<S3
+I^Q<<>o7AD?=8=Tn0@KOVm0
 R3
 !s105 arm_sv_unit
 S1
 R0
-Z10 w1683314942
+w1683321283
 8./arm.sv
 F./arm.sv
 L0 14
@@ -90,7 +90,7 @@ R3
 !s105 imem_sv_unit
 S1
 R0
-R10
+w1683321923
 8./imem.sv
 F./imem.sv
 L0 15
@@ -108,13 +108,13 @@ vreg_file
 R1
 R2
 !i10b 1
-!s100 9MH=R8CjETnhCMLV0B;Zk3
-IOi6dlRU_9E6MH?DPbR21?0
+!s100 Zhn70BhdE6OE1ITY;NWMT3
+IPTTMQN;1KTY=9]0=nR7I92
 R3
 !s105 reg_file_sv_unit
 S1
 R0
-R4
+w1683321733
 8./reg_file.sv
 F./reg_file.sv
 R5
@@ -130,7 +130,7 @@ R8
 R9
 vtestbench
 R1
-R2
+!s110 1683323210
 !i10b 1
 !s100 gY:6@fQGPk8hmkPB1?FT13
 I69fF@S^zznUQ9SfD=<?8<1
@@ -138,7 +138,7 @@ R3
 !s105 testbench_sv_unit
 S1
 R0
-R10
+w1683321933
 8./testbench.sv
 F./testbench.sv
 L0 5
@@ -146,7 +146,7 @@ R6
 r1
 !s85 0
 31
-R7
+!s108 1683323210.000000
 !s107 ./testbench.sv|
 !s90 -reportprogress|300|-work|work|./testbench.sv|
 !i113 1
@@ -162,7 +162,7 @@ R3
 !s105 top_sv_unit
 S1
 R0
-R10
+w1683314942
 8./top.sv
 F./top.sv
 L0 9

@@ -50,7 +50,7 @@ module arm (
 	logic CondExE;
 
 	// hazard signals
-	logic StallF, StallD, FlushD, FlushE, Match;
+	logic StallF, StallD, FlushD, FlushE;
 	logic Match_1E_M, Match_2E_M, Match_1E_W, Match_2E_W;
 	logic Match_12D_E, ldrStallD, PCWrPendingF;
 	logic [1:0] ForwardAE, ForwardBE;
@@ -141,7 +141,7 @@ module arm (
 
 	assign PCPrime = BranchTakenE ? ALUResultE : (PCSrcW ? ResultW : PCPlus4F);  // mux, use either default or newly computed value
 	assign PCPlus4F = PCF + 'd4;                  // default value to access next instruction
-	assign PCPlus8D = PCPlus4F;             // value read when reading from reg[15]
+	assign PCPlus8D = PCPlus4F;                   // value read when reading from reg[15]
 
 	// update the PC, at rst initialize to 0
 	always_ff @(posedge clk) begin
@@ -177,6 +177,7 @@ module arm (
 		.write_addr(WA3W),
 		.read_addr1(RA1D), 
 		.read_addr2(RA2D),
+		.R15(PCPlus8D),
 		.read_data1(RD1D), 
 		.read_data2(RD2D)
 	);
@@ -195,24 +196,18 @@ module arm (
 	// WriteData and SrcA are direct outputs of the register file,
 	// wheras SrcB is chosen between reg file output and the immediate
 	always_comb begin
-		
-		if (RA1E == 'd15) SrcAE = PCPlus8D;  // substitute the 15th regfile register for PC 
-		else begin
-			case(ForwardAE)
-				2'b00: SrcAE = RD1E;
-				2'b01: SrcAE = ResultW;
-				2'b10: SrcAE = ALUOutM;
-			endcase
-		end
-		
-		if (RA2E == 'd15) WriteDataE = PCPlus8D;  // substitute the 15th regfile register for PC 
-		else begin
-			case(ForwardBE)
-				2'b00: WriteDataE = RD2E;
-				2'b01: WriteDataE = ResultW;
-				2'b10: WriteDataE = ALUOutM;
-			endcase
-		end
+	
+		case(ForwardAE)
+			2'b00: SrcAE = RD1E;
+			2'b01: SrcAE = ResultW;
+			2'b10: SrcAE = ALUOutM;
+		endcase
+	
+		case(ForwardBE)
+			2'b00: WriteDataE = RD2E;
+			2'b01: WriteDataE = ResultW;
+			2'b10: WriteDataE = ALUOutM;
+		endcase
 
 		SrcBE = ALUSrcE ? ExtImmE : WriteDataE;  // determine other alu operand
 	end
