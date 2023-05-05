@@ -139,7 +139,7 @@ module arm (
 		WA3W <= WA3M;
 	end
 
-	assign PCPrime = BranchTakenE ? ALUResultE: (PCSrcW ? ResultW : PCPlus4F);  // mux, use either default or newly computed value
+	assign PCPrime = BranchTakenE ? ALUResultE : (PCSrcW ? ResultW : PCPlus4F);  // mux, use either default or newly computed value
 	assign PCPlus4F = PCF + 'd4;                  // default value to access next instruction
 	assign PCPlus8D = PCPlus4F;             // value read when reading from reg[15]
 
@@ -153,9 +153,14 @@ module arm (
 	end
 	 
 	// writing to flag registers
-	always_ff @(posedge clk) begin
-		if (FlagWriteE[0]) FlagsPrime[1:0] <= ALUFlags[1:0];
-		if (FlagWriteE[1]) FlagsPrime[3:2] <= ALUFlags[3:2];
+	// always_ff @(posedge clk) begin
+	// 	if (FlagWriteE[0]) FlagsPrime[1:0] <= ALUFlags[1:0];
+	// 	if (FlagWriteE[1]) FlagsPrime[3:2] <= ALUFlags[3:2];
+	// end
+
+	always_comb begin
+		if (FlagWriteE[0]) FlagsPrime[1:0] = ALUFlags[1:0];
+		if (FlagWriteE[1]) FlagsPrime[3:2] = ALUFlags[3:2];
 	end
 
 	// determine the register addresses based on control signals
