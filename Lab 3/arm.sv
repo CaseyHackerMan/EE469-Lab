@@ -31,19 +31,20 @@ module arm (
 	logic [ 3:0] ALUFlags;                    // alu combinational flag outputs
 	logic [31:0] ExtImmD, ExtImmE, SrcA, SrcB;        // immediate and alu inputs 
 	logic [31:0] ResultW;                    // computed or fetched value to be written into regfile or pc
+	logic [31:0] WriteDataE, ReadDataW, ALUOutW;
 
 
 	// control signals
 	logic PCSrcD, PCSrcE, PCSrcM, PCSrcW;
 	logic RegWriteD, RegWriteE, RegWriteM, RegWriteW;
 	logic MemtoRegD, MemtoRegE, MemtoRegM, MemtoRegW;
-	logic MemWriteD, MemWriteE; // MemWriteM;
+	logic MemWriteD, MemWriteE;  // MemWriteM;
 	logic [1:0] ALUControlD, ALUControlE;
 	logic BranchD, BranchE, BranchTakenE;
 	logic ALUSrcD, ALUSrcE;
 	logic [1:0] FlagWriteD, FlagWriteE;
 	logic [3:0] CondE;
-	logic [3:0] FlagsPrime, FlagsE; //prev FlagsReg
+	logic [3:0] FlagsPrime, FlagsE;  //prev FlagsReg
 	logic [1:0] ImmSrcD;
 	logic [1:0] RegSrcD;
 	logic CondExE;
@@ -132,7 +133,7 @@ module arm (
 	always_ff @(posedge clk) begin
 		PCSrcW <= PCSrcM;
 		RegWriteW <= RegWriteM;
-		MemetoRegW <= MemetoRegM;
+		MemtoRegW <= MemtoRegM;
 		ReadDataW <= ReadDataM;
 		ALUOutW <= ALUOutM;
 		WA3W <= WA3M;
@@ -145,8 +146,8 @@ module arm (
 	// update the PC, at rst initialize to 0
 	always_ff @(posedge clk) begin
 		if (~StallF) begin
-	  		if (rst) PC <= '0;
-	  		else     PC <= PCPrime;
+			if (rst) PCF <= '0;
+	  		else     PCF <= PCPrime;
 		end
 		// hold old value if stall
 	end
@@ -233,7 +234,7 @@ module arm (
 	assign ldrStallD = Match_12D_E & MemtoRegE;
 	assign PCWrPendingF = PCSrcD | PCSrcE | PCSrcM;  
 	assign StallF = ldrStallD | PCWrPendingF;  // stall fetch
-	assign FlushD = PCWrPendingF | PCSrcW | BranchWasTakenE;
+	assign FlushD = PCWrPendingF | PCSrcW | BranchTakenE;
 	assign FlushE = ldrStallD | BranchTakenE;
 	assign StallD = ldrStallD;
 	

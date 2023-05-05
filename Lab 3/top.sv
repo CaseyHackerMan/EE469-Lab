@@ -10,12 +10,12 @@ module top(
     input logic clk, rst
 );
     
-    // processor io signals
+    // processor io signals   
 	logic [31:0] InstrF;
 	logic [31:0] ReadDataM;
 	logic [31:0] WriteDataM;
 	logic [31:0] PCF, ALUOutM;
-    logic        MemWrite;
+    logic        MemWriteM;
 
     // our single cycle arm processor
 	arm processor (.*);
