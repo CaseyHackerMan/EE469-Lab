@@ -29,8 +29,8 @@ module arm (
 	logic [31:0] RD1E, RD2E;                  // raw regfile outputs
 	logic [ 3:0] WA3E, WA3M, WA3W;            // regfile write address
 	logic [ 3:0] ALUFlags;                    // alu combinational flag outputs
-	logic [31:0] ExtImmD, ExtImmE, SrcA, SrcB;        // immediate and alu inputs 
-	logic [31:0] ResultW;                    // computed or fetched value to be written into regfile or pc
+	logic [31:0] ExtImmD, ExtImmE, SrcAE, SrcBE;      // immediate and alu inputs 
+	logic [31:0] ResultW, ALUResultE;                 // computed or fetched value to be written into regfile or pc
 	logic [31:0] WriteDataE, ReadDataW, ALUOutW;
 
 
