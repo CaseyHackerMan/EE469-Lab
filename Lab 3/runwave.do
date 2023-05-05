@@ -13,7 +13,7 @@ vlog -work work ./dmem.sv
 vlog -work work ./testbench.sv
 
 # Note that the name of the testbench module is in this statement. If you're running a testbench with a different name CHANGE IT
-vsim -t 5fs -novopt testbench
+vsim -t 1fs -novopt testbench
 
 view signals
 view wave
