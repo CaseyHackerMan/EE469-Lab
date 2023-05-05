@@ -32,7 +32,7 @@ module top(
     // containes data accessible by the processor through ldr and str commands
     dmem dmemory (
         .clk     (clk       ), 
-        .wr_en   (MemWrite  ),
+		.wr_en   (MemWriteM ),
 		.addr    (ALUOutM   ),
 		.wr_data (WriteDataM),
 		.rd_data (ReadDataM )
