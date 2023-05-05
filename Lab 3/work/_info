@@ -1,0 +1,178 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 3
+valu
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 !s110 1683318064
+!i10b 1
+!s100 HSKzMaSk]>Ed^hP4=6O@h2
+IoAlZV:L[M;kY1DPLSEiB?2
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+!s105 alu_sv_unit
+S1
+R0
+Z4 w1683137369
+8./alu.sv
+F./alu.sv
+Z5 L0 11
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1683318064.000000
+!s107 ./alu.sv|
+!s90 -reportprogress|300|-work|work|./alu.sv|
+!i113 1
+Z8 o-work work
+Z9 tCvgOpt 0
+varm
+R1
+R2
+!i10b 1
+!s100 jMzgPHGC6g^lUdzh6U>KD2
+IbfBklz=X:Pe8VLk[gZQXO0
+R3
+!s105 arm_sv_unit
+S1
+R0
+Z10 w1683314942
+8./arm.sv
+F./arm.sv
+L0 14
+R6
+r1
+!s85 0
+31
+R7
+!s107 ./arm.sv|
+!s90 -reportprogress|300|-work|work|./arm.sv|
+!i113 1
+R8
+R9
+vdmem
+R1
+R2
+!i10b 1
+!s100 Oh:]]J_E8maKR390g`9n92
+I_0U;LLRk3P4``G4YgE:031
+R3
+!s105 dmem_sv_unit
+S1
+R0
+R4
+8./dmem.sv
+F./dmem.sv
+L0 13
+R6
+r1
+!s85 0
+31
+R7
+!s107 ./dmem.sv|
+!s90 -reportprogress|300|-work|work|./dmem.sv|
+!i113 1
+R8
+R9
+vimem
+R1
+R2
+!i10b 1
+!s100 XM1R^8^cfnT;^97G;[UbD1
+I2Y[>@JTMUG1^Hb2E:Q>S:0
+R3
+!s105 imem_sv_unit
+S1
+R0
+R10
+8./imem.sv
+F./imem.sv
+L0 15
+R6
+r1
+!s85 0
+31
+R7
+!s107 ./imem.sv|
+!s90 -reportprogress|300|-work|work|./imem.sv|
+!i113 1
+R8
+R9
+vreg_file
+R1
+R2
+!i10b 1
+!s100 9MH=R8CjETnhCMLV0B;Zk3
+IOi6dlRU_9E6MH?DPbR21?0
+R3
+!s105 reg_file_sv_unit
+S1
+R0
+R4
+8./reg_file.sv
+F./reg_file.sv
+R5
+R6
+r1
+!s85 0
+31
+R7
+!s107 ./reg_file.sv|
+!s90 -reportprogress|300|-work|work|./reg_file.sv|
+!i113 1
+R8
+R9
+vtestbench
+R1
+R2
+!i10b 1
+!s100 gY:6@fQGPk8hmkPB1?FT13
+I69fF@S^zznUQ9SfD=<?8<1
+R3
+!s105 testbench_sv_unit
+S1
+R0
+R10
+8./testbench.sv
+F./testbench.sv
+L0 5
+R6
+r1
+!s85 0
+31
+R7
+!s107 ./testbench.sv|
+!s90 -reportprogress|300|-work|work|./testbench.sv|
+!i113 1
+R8
+R9
+vtop
+R1
+R2
+!i10b 1
+!s100 ezo0=XWjS^Lak=ha:6lc;0
+IFz2i;L4NDEHZY5Ez`HIbg2
+R3
+!s105 top_sv_unit
+S1
+R0
+R10
+8./top.sv
+F./top.sv
+L0 9
+R6
+r1
+!s85 0
+31
+R7
+!s107 ./top.sv|
+!s90 -reportprogress|300|-work|work|./top.sv|
+!i113 1
+R8
+R9

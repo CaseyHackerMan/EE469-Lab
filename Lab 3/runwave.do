@@ -18,6 +18,8 @@ vsim -t 1fs -novopt testbench
 view signals
 view wave
 
+radix -hexadecimal
+
 add wave -position end  sim:/testbench/clk
 add wave -position end  sim:/testbench/rst
 add wave -position end  sim:/testbench/cpu/processor/u_reg_file/memory
@@ -31,4 +33,11 @@ add wave -position end  sim:/testbench/cpu/processor/Match
 add wave -position end  sim:/testbench/cpu/processor/ForwardAE
 add wave -position end  sim:/testbench/cpu/processor/ForwardBE
 
+radix signal sim:/testbench/cpu/processor/FlagsE binary
+radix signal sim:/testbench/cpu/processor/ALUFlags binary
+radix signal sim:/testbench/cpu/processor/ForwardAE binary
+radix signal sim:/testbench/cpu/processor/ForwardBE binary
+
 run -all
+
+wave zoom full
