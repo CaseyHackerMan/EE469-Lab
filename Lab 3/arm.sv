@@ -24,10 +24,11 @@ module arm (
 	logic [31:0] PCPrime, PCPlus4F, PCPlus8; // pc signals
 	logic [31:0] InstrD;
 	logic [ 3:0] RA1D, RA2D;                  // regfile input addresses
+	logic [ 3:0] RA1E, RA2E;                  // regfile input addresses
 	logic [31:0] RD1D, RD2D;                  // raw regfile outputs
 	logic [31:0] RD1E, RD2E;                  // raw regfile outputs
 	logic [ 3:0] WA3E, WA3M, WA3W;            // regfile write address
-	logic [ 3:0] ALUFlags;                  // alu combinational flag outputs
+	logic [ 3:0] ALUFlags;                    // alu combinational flag outputs
 	logic [31:0] ExtImmD, ExtImmE, SrcA, SrcB;        // immediate and alu inputs 
 	logic [31:0] ResultW;                    // computed or fetched value to be written into regfile or pc
 
@@ -36,21 +37,24 @@ module arm (
 	logic PCSrcD, PCSrcE, PCSrcM, PCSrcW;
 	logic RegWriteD, RegWriteE, RegWriteM, RegWriteW;
 	logic MemtoRegD, MemtoRegE, MemtoRegM, MemtoRegW;
-	logic MemWriteD, MemWriteE, MemWriteM;
+	logic MemWriteD, MemWriteE; // MemWriteM;
 	logic [1:0] ALUControlD, ALUControlE;
 	logic BranchD, BranchE, BranchTakenE;
 	logic ALUSrcD, ALUSrcE;
 	logic [1:0] FlagWriteD, FlagWriteE;
 	logic [3:0] CondE;
-	logic [3:0] Flags, FlagsE; //prev FlagsReg
+	logic [3:0] FlagsPrime, FlagsE; //prev FlagsReg
 	logic [1:0] ImmSrcD;
 	logic [1:0] RegSrcD;
 	logic CondExE;
 
+	// hazard signals
 	logic StallF, StallD, FlushD, FlushE, Match;
+	logic Match_1E_M, Match_2E_M, Match_1E_W, Match_2E_W;
+	logic Match_12D_E, ldrStallD, PCWrPendingF;
 	logic [1:0] ForwardAE, ForwardBE;
 
-	parameter NOP = 32'hE0000000;
+	parameter NOP = 32'hE1A00000;  // MOV R0, R0 (do nothing)
 
     /* The datapath consists of a PC as well as a series of muxes to make decisions about which data words
 	 ** to pass forward and operate on. It is noticeably missing the register file and alu, which you will 
@@ -60,16 +64,18 @@ module arm (
     //-------------------------------------------------------------------------------
     //                                      DATAPATH
     //-------------------------------------------------------------------------------
-
+	
 	// D registers
-	always_ff @(posedge clk)
+	always_ff @(posedge clk) begin
 		if (~StallD) begin
 			if (~FlushD)
 				InstrD <= InstrF;
 			else
 				InstrD <= NOP;
 		end
-
+		// holds old value if stall (automatic)
+	end
+	
 	// E registers
 	always_ff @(posedge clk) begin
 		if (~FlushE) begin
@@ -82,13 +88,30 @@ module arm (
 			ALUSrcE <= ALUSrcD;
 			FlagWriteE <= FlagWriteD;
 			CondE <= InstrD[31:28];
-			FlagsE <= Flags;
+			FlagsE <= FlagsPrime;
+			RA1E <= RA1D;
+			RA2E <= RA2D;
 			RD1E <= RD1D;
 			RD2E <= RD2D;
 			WA3E <= InstrD[15:12];
 			ExtImmE <= ExtImmD;
 		end else begin
-			// TODO
+			PCSrcE <= 1'b0;
+			RegWriteE <= 1'b0;
+			MemtoRegE <= 1'b0;
+			MemWriteE <= 1'b0;
+			ALUControlE <= 2'b0;
+			BranchE <= 1'b0;
+			ALUSrcE <= 1'b0;
+			FlagWriteE <= 2'b0;
+			CondE <= 4'b1110;  // open the floodgates
+			FlagsE <= 4'b0;
+			RA1E <= 4'b0;
+			RA2E <= 4'b0;
+			RD1E <= 32'b0;
+			RD2E <= 32'b0;
+			WA3E <= 4'b0;
+			ExtImmE <= 32'b0;
 		end
 	end
 
@@ -98,7 +121,7 @@ module arm (
 	always_ff @(posedge clk) begin
 		PCSrcM <= PCSrcE & CondExE;
 		RegWriteM <= RegWriteE & CondExE;
-		MemetoRegM <= MemtoRegE;
+		MemtoRegM <= MemtoRegE;
 		MemWriteM <= MemWriteE & CondExE;
 		ALUOutM <= ALUResultE;
 		WriteDataM <= WriteDataE;
@@ -125,12 +148,13 @@ module arm (
 	  		if (rst) PC <= '0;
 	  		else     PC <= PCPrime;
 		end
+		// hold old value if stall
 	end
 	 
 	// writing to flag registers
 	always_ff @(posedge clk) begin
-		if (FlagWriteE[0]) Flags[1:0] <= ALUFlags[1:0];
-		if (FlagWriteE[1]) Flags[3:2] <= ALUFlags[3:2];
+		if (FlagWriteE[0]) FlagsPrime[1:0] <= ALUFlags[1:0];
+		if (FlagWriteE[1]) FlagsPrime[3:2] <= ALUFlags[3:2];
 	end
 
 	// determine the register addresses based on control signals
@@ -193,6 +217,37 @@ module arm (
 	assign ResultW = MemtoRegW ? ReadDataW : ALUOutW;  // determine whether final writeback result is 
 																	//  from dmemory or alu
 
+    /* The hazard unit handles the hazards introduced by pipelining. 
+	**
+	*/
+    //-------------------------------------------------------------------------------
+    //                                HAZARD UNIT
+    //-------------------------------------------------------------------------------
+	
+	assign Match_1E_M = (RA1E == WA3M);
+	assign Match_1E_W = (RA1E == WA3W);
+	assign Match_2E_M = (RA2E == WA3M);
+	assign Match_2E_W = (RA2E == WA3W);
+
+	assign Match_12D_E = (RA1D == WA3E) | (RA2D == WA3E);
+	assign ldrStallD = Match_12D_E & MemtoRegE;
+	assign PCWrPendingF = PCSrcD | PCSrcE | PCSrcM;  
+	assign StallF = ldrStallD | PCWrPendingF;  // stall fetch
+	assign FlushD = PCWrPendingF | PCSrcW | BranchWasTakenE;
+	assign FlushE = ldrStallD | BranchTakenE;
+	assign StallD = ldrStallD;
+	
+	
+	always_comb begin
+		// ForwardAE logic
+		if (Match_1E_M & RegWriteM) ForwardAE = 2'b10;
+		else if (Match_1E_W & RegWriteW) ForwardAE = 2'b01;
+		else ForwardAE = 2'b00;
+		// ForwardBE logic
+		if (Match_2E_M & RegWriteM) ForwardBE = 2'b10;
+		else if (Match_2E_W & RegWriteW) ForwardBE = 2'b01;
+		else ForwardBE = 2'b00;
+	end
 
 	/* The control conists of a large decoder, which evaluates the top bits of the instruction and 
 	** produces the control bits which become the select bits and write enables of the system. The 
@@ -350,4 +405,5 @@ module arm (
 			end
 		endcase
 	end
+	
 endmodule
