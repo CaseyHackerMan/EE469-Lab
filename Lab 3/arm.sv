@@ -141,7 +141,7 @@ module arm (
 
 	assign PCPrime = BranchTakenE ? ALUResultE: (PCSrcW ? ResultW : PCPlus4F);  // mux, use either default or newly computed value
 	assign PCPlus4F = PCF + 'd4;                  // default value to access next instruction
-	assign PCPlus8D = PCPlus4F + 'd4;             // value read when reading from reg[15]
+	assign PCPlus8D = PCPlus4F;             // value read when reading from reg[15]
 
 	// update the PC, at rst initialize to 0
 	always_ff @(posedge clk) begin
@@ -190,19 +190,26 @@ module arm (
 	// WriteData and SrcA are direct outputs of the register file,
 	// wheras SrcB is chosen between reg file output and the immediate
 	always_comb begin
-		case(ForwardAE)
-			2'b00: SrcAE = RD1E;
-			2'b01: SrcAE = ResultW;
-			2'b10: SrcAE = ALUOutM;
-		endcase
-
-		SrcBE = ALUSrcE ? ExtImmE : WriteDataE;
 		
-		case(ForwardBE)
-			2'b00: WriteDataE = RD2E;
-			2'b01: WriteDataE = ResultW;
-			2'b10: WriteDataE = ALUOutM;
-		endcase
+		if (RA1E == 'd15) SrcAE = PCPlus8D;  // substitute the 15th regfile register for PC 
+		else begin
+			case(ForwardAE)
+				2'b00: SrcAE = RD1E;
+				2'b01: SrcAE = ResultW;
+				2'b10: SrcAE = ALUOutM;
+			endcase
+		end
+		
+		if (RA2E == 'd15) WriteDataE = PCPlus8D;  // substitute the 15th regfile register for PC 
+		else begin
+			case(ForwardBE)
+				2'b00: WriteDataE = RD2E;
+				2'b01: WriteDataE = ResultW;
+				2'b10: WriteDataE = ALUOutM;
+			endcase
+		end
+
+		SrcBE = ALUSrcE ? ExtImmE : WriteDataE;  // determine other alu operand
 	end
     
 	// instantiates the alu
