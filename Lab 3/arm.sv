@@ -21,7 +21,7 @@ module arm (
 );
 
 	// datapath buses and signals!
-	logic [31:0] PCPrime, PCPlus4F, PCPlus8; // pc signals
+	logic [31:0] PCPrime, PCPlus4F, PCPlus8D; // pc signals
 	logic [31:0] InstrD;
 	logic [ 3:0] RA1D, RA2D;                  // regfile input addresses
 	logic [ 3:0] RA1E, RA2E;                  // regfile input addresses
