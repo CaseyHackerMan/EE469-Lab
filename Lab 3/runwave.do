@@ -13,13 +13,22 @@ vlog -work work ./dmem.sv
 vlog -work work ./testbench.sv
 
 # Note that the name of the testbench module is in this statement. If you're running a testbench with a different name CHANGE IT
-vsim -t 1fs -novopt testbench
+vsim -t 5fs -novopt testbench
 
 view signals
 view wave
 
-# This is the wave file which stores all signals you're looking at along with their radix and other settings. If you use this feature make sure the name matches
-# the saved file, otherwise ignore this.
-# do wave_p1.do
+add wave -position end  sim:/testbench/clk
+add wave -position end  sim:/testbench/rst
+add wave -position end  sim:/testbench/cpu/processor/u_reg_file/memory
+add wave -position end  sim:/testbench/cpu/processor/FlagsE
+add wave -position end  sim:/testbench/cpu/processor/ALUFlags
+add wave -position end  sim:/testbench/cpu/processor/StallF
+add wave -position end  sim:/testbench/cpu/processor/StallD
+add wave -position end  sim:/testbench/cpu/processor/FlushD
+add wave -position end  sim:/testbench/cpu/processor/FlushE
+add wave -position end  sim:/testbench/cpu/processor/Match
+add wave -position end  sim:/testbench/cpu/processor/ForwardAE
+add wave -position end  sim:/testbench/cpu/processor/ForwardBE
 
 run -all
