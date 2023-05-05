@@ -1,13 +1,12 @@
 /* Oliver Huang [ohlbur] & Casey Culbertson [casey534]
  * Prof. Hussein
  * EE 469
- * 6 April 2023
- * Lab 2 - reg_file.sv
+ * 5 May 2023
+ * Lab 4 - reg_file.sv
+ *
+ * reg_file implements a 16x32 register file with 
+ * syncronous writing and two asyncronous read ports
  */
-
-// implements a 16x32 register file with
-// syncronous writing and two asyncronous
-// read ports
 module reg_file(input logic clk, wr_en,
                 input logic [31:0] write_data, 
                 input logic [3:0] write_addr,

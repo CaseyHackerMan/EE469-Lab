@@ -1,6 +1,12 @@
-/* arm is the spotlight of the show and contains the bulk of the datapath and
-**	control logic. This module is split into two parts, the datapath and control. 
-*/
+/* Oliver Huang [ohlbur] & Casey Culbertson [casey534]
+ * Prof. Hussein
+ * EE 469
+ * 5 May 2023
+ * Lab 4 - reg_file.sv
+ *
+ * arm is the spotlight of the show and contains the bulk of the datapath and
+ *	control logic. This module is split into two parts, the datapath and control. 
+ */
 
 // clk - system clock
 // rst - system reset
@@ -20,9 +26,9 @@ module arm (
     output logic        MemWriteM
 );
 
-	// datapath buses and signals!
+	// datapath buses and signals
 	logic [31:0] PCPrime, PCPlus4F, PCPlus8D; // pc signals
-	logic [31:0] InstrD;
+	logic [31:0] InstrD; 					  // instruction
 	logic [ 3:0] RA1D, RA2D;                  // regfile input addresses
 	logic [ 3:0] RA1E, RA2E;                  // regfile input addresses
 	logic [31:0] RD1D, RD2D;                  // raw regfile outputs
@@ -30,15 +36,15 @@ module arm (
 	logic [ 3:0] WA3E, WA3M, WA3W;            // regfile write address
 	logic [ 3:0] ALUFlags;                    // alu combinational flag outputs
 	logic [31:0] ExtImmD, ExtImmE, SrcAE, SrcBE;      // immediate and alu inputs 
-	logic [31:0] ResultW, ALUResultE;                 // computed or fetched value to be written into regfile or pc
-	logic [31:0] WriteDataE, ReadDataW, ALUOutW;
+	logic [31:0] ResultW, ALUResultE;         // computed or fetched value to be written into regfile or pc
+	logic [31:0] WriteDataE, ReadDataW, ALUOutW;      // memory signals
 
 
 	// control signals
 	logic PCSrcD, PCSrcE, PCSrcM, PCSrcW;
 	logic RegWriteD, RegWriteE, RegWriteM, RegWriteW;
 	logic MemtoRegD, MemtoRegE, MemtoRegM, MemtoRegW;
-	logic MemWriteD, MemWriteE;  // MemWriteM;
+	logic MemWriteD, MemWriteE;
 	logic [1:0] ALUControlD, ALUControlE;
 	logic BranchD, BranchE, BranchTakenE;
 	logic ALUSrcD, ALUSrcE;
@@ -57,11 +63,6 @@ module arm (
 
 	parameter NOP = 32'hE1A00000;  // MOV R0, R0 (do nothing)
 
-    /* The datapath consists of a PC as well as a series of muxes to make decisions about which data words
-	 ** to pass forward and operate on. It is noticeably missing the register file and alu, which you will 
-	 ** fill in using the modules made in lab 1. To correctly match up signals to the ports of the register
-	 ** file and alu take some time to study and understand the logic and flow of the datapath.
-    */
     //-------------------------------------------------------------------------------
     //                                      DATAPATH
     //-------------------------------------------------------------------------------
@@ -151,12 +152,6 @@ module arm (
 		end
 		// hold old value if stall
 	end
-	 
-	// writing to flag registers
-	// always_ff @(posedge clk) begin
-	// 	if (FlagWriteE[0]) FlagsPrime[1:0] <= ALUFlags[1:0];
-	// 	if (FlagWriteE[1]) FlagsPrime[3:2] <= ALUFlags[3:2];
-	// end
 
 	always_comb begin
 		if (FlagWriteE[0]) FlagsPrime[1:0] = ALUFlags[1:0];
@@ -188,7 +183,7 @@ module arm (
 		if (ImmSrcD == 'b00) 
 			ExtImmD = {{24{InstrD[7]}},InstrD[7:0]};          // 8 bit immediate - reg operations
 		else if (ImmSrcD == 'b01)
-			ExtImmD = {20'b0, InstrD[11:0]};                 // 12 bit immediate - mem operations
+			ExtImmD = {20'b0, InstrD[11:0]};                  // 12 bit immediate - mem operations
 		else
 			ExtImmD = {{6{InstrD[23]}}, InstrD[23:0], 2'b00}; // 24 bit immediate - branch operation
 	end
@@ -196,7 +191,6 @@ module arm (
 	// WriteData and SrcA are direct outputs of the register file,
 	// wheras SrcB is chosen between reg file output and the immediate
 	always_comb begin
-	
 		case(ForwardAE)
 			2'b00: SrcAE = RD1E;
 			2'b01: SrcAE = ResultW;
@@ -223,21 +217,23 @@ module arm (
 
 	// determine the result to run back to PC or the register file based on whether we used a memory instruction
 	assign ResultW = MemtoRegW ? ReadDataW : ALUOutW;  // determine whether final writeback result is 
-																	//  from dmemory or alu
+													   // from dmemory or alu
 
-    /* The hazard unit handles the hazards introduced by pipelining. 
-	**
+    /* The hazard unit handles the hazards introduced by pipelining. It controls the
+	** forwarding, stalling, and flushing needed to ensure correct excecution.
 	*/
     //-------------------------------------------------------------------------------
     //                                HAZARD UNIT
     //-------------------------------------------------------------------------------
 	
+	// match detection
 	assign Match_1E_M = (RA1E == WA3M);
 	assign Match_1E_W = (RA1E == WA3W);
 	assign Match_2E_M = (RA2E == WA3M);
 	assign Match_2E_W = (RA2E == WA3W);
-
 	assign Match_12D_E = (RA1D == WA3E) | (RA2D == WA3E);
+
+	// stalling and flushing control
 	assign ldrStallD = Match_12D_E & MemtoRegE;
 	assign PCWrPendingF = PCSrcD | PCSrcE | PCSrcM;  
 	assign StallF = ldrStallD | PCWrPendingF;  // stall fetch
@@ -245,28 +241,21 @@ module arm (
 	assign FlushE = ldrStallD | BranchTakenE;
 	assign StallD = ldrStallD;
 	
-	
 	always_comb begin
 		// ForwardAE logic
 		if (Match_1E_M & RegWriteM) ForwardAE = 2'b10;
 		else if (Match_1E_W & RegWriteW) ForwardAE = 2'b01;
 		else ForwardAE = 2'b00;
+
 		// ForwardBE logic
 		if (Match_2E_M & RegWriteM) ForwardBE = 2'b10;
 		else if (Match_2E_W & RegWriteW) ForwardBE = 2'b01;
 		else ForwardBE = 2'b00;
 	end
 
-	/* The control conists of a large decoder, which evaluates the top bits of the instruction and 
-	** produces the control bits which become the select bits and write enables of the system. The 
-	** write enables (RegWrite, MemWrite and PCSrc) are especially important because they are 
-	** representative of your processors current state. 
-	*/
 	//-------------------------------------------------------------------------------
 	//                                      CONTROL
 	//-------------------------------------------------------------------------------
-
-	
 	
 	// sets conditional excecution based on conditional and flags (N, Z, C, V)
 	always_comb begin
@@ -280,12 +269,11 @@ module arm (
 			4'b1110 : CondExE = 1;
 			default:  CondExE = 0;
 		endcase
-
-		
 	end
 				
     // set contol signals 
     always_comb begin
+		
 		casez (InstrD[27:20])
 			// ADD/ADDS (Imm or Reg)
 			8'b00?_0100_? : begin   // bit 20 sets flags (ADDS), bit 25 decides immediate or reg

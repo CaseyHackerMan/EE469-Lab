@@ -10,7 +10,7 @@ cModel Technology
 Z0 dC:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 3
 valu
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1683323209
+Z2 !s110 1683327839
 !i10b 1
 !s100 HSKzMaSk]>Ed^hP4=6O@h2
 IoAlZV:L[M;kY1DPLSEiB?2
@@ -21,41 +21,41 @@ R0
 Z4 w1683137369
 8./alu.sv
 F./alu.sv
-Z5 L0 11
-Z6 OV;L;10.5b;63
+L0 11
+Z5 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z7 !s108 1683323209.000000
+Z6 !s108 1683327839.000000
 !s107 ./alu.sv|
 !s90 -reportprogress|300|-work|work|./alu.sv|
 !i113 1
-Z8 o-work work
-Z9 tCvgOpt 0
+Z7 o-work work
+Z8 tCvgOpt 0
 varm
 R1
 R2
 !i10b 1
-!s100 cm4Je?AB]91nb6^Mf8a<S3
-I^Q<<>o7AD?=8=Tn0@KOVm0
+!s100 NL6fbDPYJHFIRk2LSglLf1
+IN`a;gozO[J`=YBlL8EMTW3
 R3
 !s105 arm_sv_unit
 S1
 R0
-w1683321283
+w1683327837
 8./arm.sv
 F./arm.sv
-L0 14
-R6
+L0 20
+R5
 r1
 !s85 0
 31
-R7
+R6
 !s107 ./arm.sv|
 !s90 -reportprogress|300|-work|work|./arm.sv|
 !i113 1
+R7
 R8
-R9
 vdmem
 R1
 R2
@@ -70,16 +70,16 @@ R4
 8./dmem.sv
 F./dmem.sv
 L0 13
-R6
+R5
 r1
 !s85 0
 31
-R7
+R6
 !s107 ./dmem.sv|
 !s90 -reportprogress|300|-work|work|./dmem.sv|
 !i113 1
+R7
 R8
-R9
 vimem
 R1
 R2
@@ -93,44 +93,44 @@ R0
 w1683321923
 8./imem.sv
 F./imem.sv
-L0 15
-R6
+Z9 L0 15
+R5
 r1
 !s85 0
 31
-R7
+R6
 !s107 ./imem.sv|
 !s90 -reportprogress|300|-work|work|./imem.sv|
 !i113 1
+R7
 R8
-R9
 vreg_file
 R1
 R2
 !i10b 1
-!s100 Zhn70BhdE6OE1ITY;NWMT3
-IPTTMQN;1KTY=9]0=nR7I92
+!s100 [5GOK70^`UKG_zhW:n^h?1
+I1B3?40>E?OU^>5``TgjFd3
 R3
 !s105 reg_file_sv_unit
 S1
 R0
-w1683321733
+w1683324107
 8./reg_file.sv
 F./reg_file.sv
+L0 10
 R5
-R6
 r1
 !s85 0
 31
-R7
+R6
 !s107 ./reg_file.sv|
 !s90 -reportprogress|300|-work|work|./reg_file.sv|
 !i113 1
+R7
 R8
-R9
 vtestbench
 R1
-!s110 1683323210
+R2
 !i10b 1
 !s100 gY:6@fQGPk8hmkPB1?FT13
 I69fF@S^zznUQ9SfD=<?8<1
@@ -142,37 +142,37 @@ w1683321933
 8./testbench.sv
 F./testbench.sv
 L0 5
-R6
+R5
 r1
 !s85 0
 31
-!s108 1683323210.000000
+R6
 !s107 ./testbench.sv|
 !s90 -reportprogress|300|-work|work|./testbench.sv|
 !i113 1
+R7
 R8
-R9
 vtop
 R1
 R2
 !i10b 1
-!s100 ezo0=XWjS^Lak=ha:6lc;0
-IFz2i;L4NDEHZY5Ez`HIbg2
+!s100 MJ@QK6Fg7PlZP=cY][i=V3
+IAm8kVG5AJ6c8QJ<GaHjSf1
 R3
 !s105 top_sv_unit
 S1
 R0
-w1683314942
+w1683324139
 8./top.sv
 F./top.sv
-L0 9
-R6
+R9
+R5
 r1
 !s85 0
 31
-R7
+R6
 !s107 ./top.sv|
 !s90 -reportprogress|300|-work|work|./top.sv|
 !i113 1
+R7
 R8
-R9
