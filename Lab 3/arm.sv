@@ -20,7 +20,7 @@ module arm (
     output logic        MemWriteM
 );
 
-	// datapath buses and signals
+	// datapath buses and signals!
 	logic [31:0] PCPrime, PCPlus4F, PCPlus8; // pc signals
 	logic [31:0] InstrD;
 	logic [ 3:0] RA1D, RA2D;                  // regfile input addresses
