@@ -50,6 +50,8 @@ module arm (
 	logic StallF, StallD, FlushD, FlushE, Match;
 	logic [1:0] ForwardAE, ForwardBE;
 
+	parameter NOP = 32'hE0000000;
+
     /* The datapath consists of a PC as well as a series of muxes to make decisions about which data words
 	 ** to pass forward and operate on. It is noticeably missing the register file and alu, which you will 
 	 ** fill in using the modules made in lab 1. To correctly match up signals to the ports of the register
@@ -65,7 +67,7 @@ module arm (
 			if (~FlushD)
 				InstrD <= InstrF;
 			else
-				// TODO
+				InstrD <= NOP;
 		end
 
 	// E registers
@@ -205,14 +207,15 @@ module arm (
 	
 	// sets conditional excecution based on conditional and flags (N, Z, C, V)
 	always_comb begin
-		case (CondE[31:28])
+		case (CondE)
 			4'b0000 : CondExE = FlagsE[2]; // EQ
 			4'b0001 : CondExE = ~FlagsE[2];// NE
 			4'b1010 : CondExE = ~(FlagsE[3] ^ FlagsE[0]); // GE
 			4'b1100 : CondExE = ~FlagsE[2] & ~(FlagsE[3] ^ FlagsE[0]); // GT
 			4'b1101 : CondExE = FlagsE[2] | (FlagsE[3] ^ FlagsE[0]); // LE
 			4'b1011 : CondExE = FlagsE[3] ^ FlagsE[0]; // LT
-			default:  CondExE = 1;
+			4'b1110 : CondExE = 1;
+			default:  CondExE = 0;
 		endcase
 
 		
