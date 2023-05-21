@@ -2,7 +2,7 @@
  * Prof. Hussein
  * EE 469
  * 5 May 2023
- * Lab 4 - reg_file.sv
+ * Lab 4 - arm.sv
  *
  * arm is the spotlight of the show and contains the bulk of the datapath and
  *	control logic. This module is split into two parts, the datapath and control. 
@@ -10,7 +10,7 @@
 
 // clk - system clock
 // rst - system reset
-// InstrF - incoming 32 bit instruction from imem, contains opcode, condition, addresses and or immediates
+// InstrF - incoming 32 bit instruction from imem
 // ReadData - data read out of the dmem
 // WriteData - data to be written to the dmem
 // MemWrite - write enable to allowed WriteData to overwrite an existing dmem word
@@ -36,7 +36,8 @@ module arm (
 	logic [ 3:0] WA3E, WA3M, WA3W;            // regfile write address
 	logic [ 3:0] ALUFlags;                    // alu combinational flag outputs
 	logic [31:0] ExtImmD, ExtImmE, SrcAE, SrcBE;      // immediate and alu inputs 
-	logic [31:0] ResultW, ALUResultE;         // computed or fetched value to be written into regfile or pc
+	logic [31:0] ResultW, ALUResultE;   	  // computed or fetched value to be 
+											  // 	written into regfile or pc
 	logic [31:0] WriteDataE, ReadDataW, ALUOutW;      // memory signals
 
 
@@ -140,7 +141,9 @@ module arm (
 		WA3W <= WA3M;
 	end
 
-	assign PCPrime = BranchTakenE ? ALUResultE : (PCSrcW ? ResultW : PCPlus4F);  // mux, use either default or newly computed value
+	// mux, use either default or newly computed value
+	assign PCPrime = BranchTakenE ? ALUResultE : (PCSrcW ? ResultW : PCPlus4F);  
+
 	assign PCPlus4F = PCF + 'd4;                  // default value to access next instruction
 	assign PCPlus8D = PCPlus4F;                   // value read when reading from reg[15]
 

@@ -10,7 +10,7 @@ cModel Technology
 Z0 dC:/Users/casey/Desktop/Class Stuff/EE 469/EE469-Lab/Lab 3
 valu
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1683327839
+Z2 !s110 1683340686
 !i10b 1
 !s100 HSKzMaSk]>Ed^hP4=6O@h2
 IoAlZV:L[M;kY1DPLSEiB?2
@@ -26,7 +26,7 @@ Z5 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z6 !s108 1683327839.000000
+Z6 !s108 1683340686.000000
 !s107 ./alu.sv|
 !s90 -reportprogress|300|-work|work|./alu.sv|
 !i113 1
@@ -58,7 +58,7 @@ R7
 R8
 vdmem
 R1
-R2
+Z9 !s110 1683340687
 !i10b 1
 !s100 Oh:]]J_E8maKR390g`9n92
 I_0U;LLRk3P4``G4YgE:031
@@ -74,7 +74,7 @@ R5
 r1
 !s85 0
 31
-R6
+Z10 !s108 1683340687.000000
 !s107 ./dmem.sv|
 !s90 -reportprogress|300|-work|work|./dmem.sv|
 !i113 1
@@ -93,7 +93,7 @@ R0
 w1683321923
 8./imem.sv
 F./imem.sv
-Z9 L0 15
+Z11 L0 15
 R5
 r1
 !s85 0
@@ -130,7 +130,7 @@ R7
 R8
 vtestbench
 R1
-R2
+R9
 !i10b 1
 !s100 gY:6@fQGPk8hmkPB1?FT13
 I69fF@S^zznUQ9SfD=<?8<1
@@ -146,7 +146,7 @@ R5
 r1
 !s85 0
 31
-R6
+R10
 !s107 ./testbench.sv|
 !s90 -reportprogress|300|-work|work|./testbench.sv|
 !i113 1
@@ -165,12 +165,12 @@ R0
 w1683324139
 8./top.sv
 F./top.sv
-R9
+R11
 R5
 r1
 !s85 0
 31
-R6
+!s108 1683340685.000000
 !s107 ./top.sv|
 !s90 -reportprogress|300|-work|work|./top.sv|
 !i113 1
